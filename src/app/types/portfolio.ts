@@ -17,11 +17,11 @@ export interface Project {
   tech: string[];
   overview: string;
   contribution: string;
-  architecture: string;
-  metrics: { label: string; value: string }[];
+  architecture?: string;
+  metrics?: { label: string; value: string }[];
   gallery: string[];
-  challenges: string;
-  lessons: string;
-  github: string;
+  challenges?: string;
+  lessons?: string;
+  github?: string;
   demo?: string;
 }

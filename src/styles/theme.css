@@ -39,6 +39,18 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --xcode-canvas-top: #17345b;
+  --xcode-canvas-mid: #0d2d4d;
+  --xcode-canvas-bottom: #003946;
+  --xcode-toolbar: rgba(24, 50, 87, 0.74);
+  --xcode-sidebar: rgba(5, 26, 47, 0.78);
+  --xcode-glass: rgba(28, 57, 92, 0.46);
+  --xcode-glass-strong: rgba(15, 42, 70, 0.76);
+  --xcode-glass-border: rgba(113, 168, 224, 0.24);
+  --xcode-glass-highlight: rgba(211, 232, 255, 0.16);
+  --xcode-shadow: rgba(0, 8, 24, 0.38);
+  --xcode-orange: #ff9f0a;
+  --xcode-orange-soft: #ffb340;
 }
 
 .dark {
@@ -177,5 +189,275 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+  }
+}
+
+@layer components {
+  .portfolio-shell {
+    display: grid;
+    grid-template-columns: 244px minmax(0, 1fr);
+    grid-template-rows: 56px minmax(0, 1fr);
+  }
+
+  .xcode-shell {
+    position: relative;
+    isolation: isolate;
+    background:
+      radial-gradient(circle at 78% -15%, rgba(70, 126, 205, 0.28), transparent 38%),
+      radial-gradient(circle at 42% 115%, rgba(0, 149, 155, 0.2), transparent 44%),
+      linear-gradient(150deg, var(--xcode-canvas-top) 0%, var(--xcode-canvas-mid) 47%, var(--xcode-canvas-bottom) 100%);
+  }
+
+  .xcode-shell::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    opacity: 0.28;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+    background-size: 100% 3px;
+  }
+
+  .xcode-workspace {
+    background: linear-gradient(155deg, rgba(16, 50, 84, 0.7), rgba(0, 49, 60, 0.58));
+    box-shadow: inset 1px 1px 0 rgba(165, 206, 244, 0.05);
+  }
+
+  .editor-tabs {
+    background: rgba(7, 29, 53, 0.82);
+    box-shadow: inset 0 1px 0 rgba(106, 158, 207, 0.05);
+  }
+
+  .empty-workspace {
+    background: #071d35;
+  }
+
+  .empty-workspace .editor-tabs {
+    background: #071d35;
+  }
+
+  .code-preview {
+    border: 1px solid rgba(60, 123, 180, 0.42);
+    background: rgba(4, 31, 53, 0.78);
+    box-shadow:
+      inset 0 1px 0 rgba(110, 170, 224, 0.09),
+      0 20px 45px rgba(0, 11, 29, 0.28);
+  }
+
+  .skill-item {
+    border: 1px solid rgba(52, 111, 165, 0.34);
+    background: #0d2b49;
+    box-shadow:
+      inset 0 1px 0 rgba(108, 169, 224, 0.08),
+      0 4px 12px rgba(0, 10, 26, 0.16);
+    transition:
+      border-color 160ms ease,
+      background-color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .skill-item:hover {
+    border-color: rgba(56, 139, 214, 0.56);
+    background: #123655;
+    transform: translateY(-1px);
+  }
+
+  .xcode-titlebar {
+    border-bottom: 1px solid rgba(54, 109, 158, 0.28);
+    background: #112b4b;
+    box-shadow:
+      inset 0 1px 0 rgba(115, 174, 228, 0.1),
+      0 5px 18px rgba(0, 9, 24, 0.24);
+  }
+
+  .xcode-app-icon {
+    border: 1px solid rgba(61, 119, 172, 0.52);
+    background: #0b2846;
+    color: var(--xcode-orange-soft);
+    box-shadow:
+      inset 0 1px 0 rgba(112, 170, 224, 0.09),
+      0 2px 6px rgba(0, 9, 24, 0.2);
+  }
+
+  .xcode-segmented {
+    border: 1px solid rgba(48, 105, 161, 0.48);
+    background: #0c2340;
+    box-shadow:
+      inset 0 1px 0 rgba(112, 170, 224, 0.09),
+      0 2px 5px rgba(0, 7, 20, 0.2);
+  }
+
+  .xcode-segment-active {
+    background: #1c4d7c;
+    color: #b8d9f5;
+    box-shadow:
+      inset 0 1px 0 rgba(133, 190, 239, 0.14),
+      0 1px 3px rgba(0, 7, 20, 0.26);
+  }
+
+  .xcode-tool-button {
+    border: 1px solid rgba(48, 105, 161, 0.46);
+    background: #0c2340;
+    color: #8fa9c1;
+    box-shadow:
+      inset 0 1px 0 rgba(112, 170, 224, 0.09),
+      0 2px 5px rgba(0, 7, 20, 0.18);
+  }
+
+  .xcode-tool-button:hover {
+    border-color: rgba(71, 147, 214, 0.48);
+    background: #143555;
+    color: #c4e3ff;
+  }
+
+  .xcode-primary-button {
+    border: 1px solid rgba(55, 124, 188, 0.58);
+    background: #164c79;
+    color: #d0e8fb;
+    box-shadow:
+      inset 0 1px 0 rgba(132, 190, 239, 0.14),
+      0 3px 8px rgba(0, 19, 45, 0.24);
+  }
+
+  .xcode-primary-button:hover {
+    background: #1c5b8f;
+  }
+
+  .xcode-secondary-button {
+    border: 1px solid rgba(48, 105, 161, 0.46);
+    background: #0c2947;
+    color: #bdcddd;
+    box-shadow:
+      inset 0 1px 0 rgba(112, 170, 224, 0.09),
+      0 2px 5px rgba(0, 7, 20, 0.18);
+  }
+
+  .xcode-secondary-button:hover {
+    border-color: rgba(82, 164, 235, 0.5);
+    background: #143a5e;
+    color: #c9e5fa;
+  }
+
+  .glass-sidebar {
+    border-right: 1px solid var(--xcode-glass-border);
+    background:
+      linear-gradient(155deg, rgba(20, 53, 87, 0.32), rgba(0, 40, 51, 0.2)),
+      var(--xcode-sidebar);
+    box-shadow:
+      inset -1px 0 0 rgba(159, 201, 244, 0.06),
+      12px 0 36px rgba(0, 10, 28, 0.16);
+    backdrop-filter: blur(24px) saturate(135%);
+    -webkit-backdrop-filter: blur(24px) saturate(135%);
+  }
+
+  .glass-control {
+    border: 1px solid var(--xcode-glass-border);
+    background: linear-gradient(180deg, rgba(108, 147, 193, 0.18), rgba(13, 37, 65, 0.28));
+    box-shadow:
+      inset 0 1px 0 var(--xcode-glass-highlight),
+      0 4px 14px rgba(0, 10, 27, 0.18);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  .glass-card {
+    border: 1px solid var(--xcode-glass-border);
+    background:
+      linear-gradient(145deg, rgba(55, 92, 130, 0.2), rgba(7, 38, 61, 0.4)),
+      var(--xcode-glass);
+    box-shadow:
+      inset 0 1px 0 rgba(210, 232, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 11, 30, 0.18),
+      0 14px 38px var(--xcode-shadow);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+  }
+
+  .glass-card-interactive:hover {
+    border-color: rgba(77, 163, 255, 0.56);
+    background:
+      linear-gradient(145deg, rgba(72, 115, 160, 0.25), rgba(8, 46, 70, 0.46)),
+      var(--xcode-glass);
+    box-shadow:
+      inset 0 1px 0 rgba(222, 238, 255, 0.15),
+      0 18px 46px rgba(0, 24, 55, 0.44),
+      0 0 28px rgba(10, 132, 255, 0.08);
+  }
+
+  .glass-inset {
+    border: 1px solid rgba(99, 153, 207, 0.2);
+    background: rgba(2, 25, 44, 0.42);
+    box-shadow:
+      inset 0 1px 8px rgba(0, 8, 24, 0.25),
+      inset 0 1px 0 rgba(185, 216, 247, 0.05);
+  }
+
+  .xcode-selection {
+    background: linear-gradient(90deg, rgba(107, 111, 119, 0.62), rgba(86, 99, 115, 0.48));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 3px 12px rgba(0, 7, 20, 0.16);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-toolbar,
+  .glass-sidebar,
+  .glass-control,
+  .glass-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .portfolio-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .portfolio-shell > aside {
+    display: none;
+  }
+
+  .portfolio-shell > header {
+    grid-column: 1;
+  }
+
+  .toolbar-actions {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .toolbar-traffic-lights,
+  .toolbar-brand span:last-child,
+  .xcode-titlebar > span {
+    display: none;
+  }
+
+  .xcode-titlebar {
+    padding-inline: 0.75rem;
+    gap: 0.625rem;
+  }
+
+  .toolbar-navigation {
+    flex: 1;
+  }
+
+  .toolbar-navigation > button {
+    flex: 1 0 auto;
+    padding-inline: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

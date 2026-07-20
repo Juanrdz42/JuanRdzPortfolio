@@ -10,21 +10,21 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.22 }}
-      className="max-w-[820px] mx-auto px-10 py-9"
+      className="max-w-[960px] mx-auto px-12 py-11"
     >
       <BackButton onClick={onBack} />
 
       {/* Hero */}
-      <div className="relative rounded-2xl overflow-hidden mb-8 border border-[#294F70] bg-[#04111F]">
+      <div className="glass-card relative rounded-2xl overflow-hidden mb-8">
         <img
           src={project.image}
-          alt={project.name}
+          alt={`Temporary placeholder for ${project.name}`}
           className="w-full h-64 object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#07182C]/80 via-[#07182C]/20 to-transparent" />
         <div className="absolute bottom-6 left-7">
-          <h1 className="text-4xl font-semibold text-[#F4F7FB] tracking-tight mb-1">{project.name}</h1>
-          <p className="text-[#9EB1C4] text-sm">{project.tagline}</p>
+          <h1 className="text-[42px] font-semibold text-[#F4F7FB] tracking-tight mb-1">{project.name}</h1>
+          <p className="text-[#9EB1C4] text-base">{project.tagline}</p>
         </div>
       </div>
 
@@ -36,21 +36,23 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
           ))}
         </div>
         <div className="flex gap-2">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0B2740] border border-[#294F70] text-xs font-mono text-[#9EB1C4] hover:text-[#F4F7FB] hover:border-[#0A84FF]/60 transition-all"
-          >
-            <Github size={13} />
-            GitHub
-          </a>
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="xcode-secondary-button inline-flex items-center gap-2 rounded-lg px-4 py-2 font-mono text-xs transition-colors"
+            >
+              <Github size={13} />
+              GitHub
+            </a>
+          )}
           {project.demo && (
             <a
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0A84FF] text-xs font-mono text-white hover:bg-[#0070d4] transition-colors"
+              className="xcode-primary-button inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono transition-colors"
             >
               <ExternalLink size={13} />
               Live Demo
@@ -71,30 +73,34 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
           <p className="text-[#9EB1C4] leading-relaxed text-sm">{project.contribution}</p>
         </div>
 
-        <div>
-          <SectionLabel>Architecture</SectionLabel>
-          <div className="bg-[#04111F] border border-[#294F70] rounded-xl p-5">
-            <p className="text-[#9EB1C4] font-mono text-xs leading-relaxed">{project.architecture}</p>
+        {project.architecture && (
+          <div>
+            <SectionLabel>Architecture</SectionLabel>
+            <div className="glass-inset rounded-xl p-5">
+              <p className="font-mono text-xs leading-relaxed text-[#9EB1C4]">{project.architecture}</p>
+            </div>
           </div>
-        </div>
+        )}
 
-        <div>
-          <SectionLabel>Key Metrics</SectionLabel>
-          <div className="grid grid-cols-4 gap-3">
-            {project.metrics.map((m) => (
-              <MetricCard key={m.label} label={m.label} value={m.value} />
-            ))}
+        {project.metrics && project.metrics.length > 0 && (
+          <div>
+            <SectionLabel>Key Metrics</SectionLabel>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3">
+              {project.metrics.map((metric) => (
+                <MetricCard key={metric.label} label={metric.label} value={metric.value} />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div>
           <SectionLabel>Gallery</SectionLabel>
           <div className="grid grid-cols-3 gap-3">
             {project.gallery.map((src, i) => (
-              <div key={i} className="rounded-xl overflow-hidden border border-[#294F70] bg-[#04111F]">
+              <div key={i} className="glass-card rounded-xl overflow-hidden">
                 <img
                   src={src}
-                  alt={`${project.name} screenshot ${i + 1}`}
+                  alt={`Temporary placeholder ${i + 1} for ${project.name}`}
                   className="w-full h-36 object-cover opacity-90"
                 />
               </div>
@@ -102,15 +108,19 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
           </div>
         </div>
 
-        <div>
-          <SectionLabel>Challenges</SectionLabel>
-          <p className="text-[#9EB1C4] leading-relaxed text-sm">{project.challenges}</p>
-        </div>
+        {project.challenges && (
+          <div>
+            <SectionLabel>Challenges</SectionLabel>
+            <p className="text-sm leading-relaxed text-[#9EB1C4]">{project.challenges}</p>
+          </div>
+        )}
 
-        <div className="pb-12">
-          <SectionLabel>Lessons Learned</SectionLabel>
-          <p className="text-[#9EB1C4] leading-relaxed text-sm">{project.lessons}</p>
-        </div>
+        {project.lessons && (
+          <div className="pb-12">
+            <SectionLabel>Lessons Learned</SectionLabel>
+            <p className="text-sm leading-relaxed text-[#9EB1C4]">{project.lessons}</p>
+          </div>
+        )}
       </div>
     </motion.div>
   );

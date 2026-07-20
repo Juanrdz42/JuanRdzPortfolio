@@ -1,4 +1,17 @@
 import { motion } from "motion/react";
+import { SOCIAL_LINKS } from "../config/site";
+import { personal } from "../data/personal";
+
+const contactItems = [
+  { label: "Email", value: personal.email, href: `mailto:${personal.email}` },
+  {
+    label: "LinkedIn",
+    value: "juan-antonio-rodriguez-reyna",
+    href: SOCIAL_LINKS.linkedin,
+  },
+  { label: "GitHub", value: "github.com/Juanrdz42", href: SOCIAL_LINKS.github },
+  { label: "Location", value: personal.location, href: null },
+];
 
 export function ContactPage() {
   return (
@@ -6,38 +19,37 @@ export function ContactPage() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.22 }}
-      className="max-w-[820px] mx-auto px-10 py-9"
+      className="mx-auto max-w-[960px] px-12 py-11"
     >
       <div className="mb-8">
-        <p className="text-[10px] font-mono text-[#0A84FF] uppercase tracking-[0.15em] mb-2">Get in touch</p>
-        <h1 className="text-3xl font-semibold text-[#F4F7FB] tracking-tight">Contact</h1>
+        <p className="mb-2 font-mono text-xs uppercase tracking-[0.15em] text-[var(--xcode-orange-soft)]">
+          Get in touch
+        </p>
+        <h1 className="text-4xl font-semibold tracking-tight text-[#F4F7FB]">Contact</h1>
       </div>
 
-      <p className="text-[#9EB1C4] text-sm mb-8 leading-relaxed max-w-lg">
-        Open to internship and new grad opportunities, research collaborations, and interesting side projects. The best way to reach me is email — I typically respond within 24 hours.
+      <p className="mb-8 max-w-2xl text-base leading-relaxed text-[#9EB1C4]">
+        The best way to contact me is by email or LinkedIn. I am based in Monterrey, Nuevo León, Mexico.
       </p>
 
-      <div className="space-y-2 mb-12 max-w-lg">
-        {[
-          { label: "Email", value: "juan.rodriguez@upr.edu", href: "mailto:juan.rodriguez@upr.edu" },
-          { label: "LinkedIn", value: "linkedin.com/in/jantrodriguez", href: "#" },
-          { label: "GitHub", value: "github.com/jantrodriguez", href: "#" },
-          { label: "Location", value: "San Juan, Puerto Rico", href: null },
-        ].map((item) => (
+      <div className="mb-12 max-w-2xl space-y-2">
+        {contactItems.map((item) => (
           <div
             key={item.label}
-            className="flex items-center gap-5 bg-[#0B2740] border border-[#294F70] rounded-xl px-5 py-3.5"
+            className="glass-card glass-card-interactive flex items-center gap-5 rounded-xl px-5 py-3.5 transition-all duration-300"
           >
-            <span className="text-[11px] font-mono text-[#9EB1C4] w-16 flex-shrink-0">{item.label}</span>
+            <span className="w-20 flex-shrink-0 font-mono text-xs text-[#9EB1C4]">{item.label}</span>
             {item.href ? (
               <a
                 href={item.href}
-                className="text-xs font-mono text-[#0A84FF] hover:text-[#F4F7FB] transition-colors"
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="font-mono text-xs text-[#0A84FF] transition-colors hover:text-[#F4F7FB]"
               >
                 {item.value}
               </a>
             ) : (
-              <span className="text-xs font-mono text-[#F4F7FB]">{item.value}</span>
+              <span className="font-mono text-xs text-[#F4F7FB]">{item.value}</span>
             )}
           </div>
         ))}

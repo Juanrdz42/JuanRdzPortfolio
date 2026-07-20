@@ -1,54 +1,51 @@
 import { Download, Github, Linkedin } from "lucide-react";
 import { clsx } from "clsx";
+import { RESUME_PATH, SOCIAL_LINKS } from "../../config/site";
+import { topNavigation } from "../../data/navigation";
 import type { Page } from "../../types/portfolio";
 
 export function Toolbar({
   currentPage,
   onNavigate,
 }: {
-  currentPage: Page;
+  currentPage: Page | null;
   onNavigate: (page: Page) => void;
 }) {
-  const navItems: { label: string; page: Page }[] = [
-    { label: "About", page: "about" },
-    { label: "Experience", page: "experience" },
-    { label: "Projects", page: "home" },
-    { label: "Leadership", page: "leadership" },
-    { label: "Contact", page: "contact" },
-  ];
-
-  const isProjectPage = currentPage.startsWith("project-");
+  const isProjectPage = currentPage?.startsWith("project-") ?? false;
   const activeNavPage =
     isProjectPage ? "home" : currentPage;
 
   return (
-    <header className="col-span-2 h-10 flex-shrink-0 border-b border-[#294F70] bg-[#04111F] flex items-center px-4 gap-3">
+    <header className="xcode-titlebar relative z-10 col-span-2 h-14 flex-shrink-0 flex items-center px-5 gap-3.5">
       {/* Traffic lights */}
-      <div className="flex items-center gap-[5px] mr-1">
+      <div className="toolbar-traffic-lights mr-1 flex items-center gap-[5px]">
         <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
         <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
         <span className="w-3 h-3 rounded-full bg-[#28C840]" />
       </div>
 
-      <button
-        onClick={() => onNavigate("home")}
-        className="text-[11px] font-mono text-[#F4F7FB]/70 hover:text-[#0A84FF] transition-colors"
-      >
-        jar.portfolio
+      <button type="button" onClick={() => onNavigate("home")} className="toolbar-brand group flex items-center gap-2">
+        <span className="xcode-app-icon grid h-7 w-7 place-items-center rounded-md">
+          <span className="font-mono text-[10px] font-bold tracking-[-0.08em]">JR</span>
+        </span>
+        <span className="text-[13px] font-semibold text-[#C1D3E4] group-hover:text-[#D8ECFF] transition-colors">
+          jarr.portfolio
+        </span>
       </button>
 
       <span className="h-3.5 w-px bg-[#294F70]" />
 
-      <nav className="flex items-center gap-0.5">
-        {navItems.map((item) => (
+      <nav className="toolbar-navigation xcode-segmented flex items-center overflow-x-auto rounded-lg p-0.5 [scrollbar-width:none]">
+        {topNavigation.map((item) => (
           <button
             key={item.page}
+            type="button"
             onClick={() => onNavigate(item.page)}
             className={clsx(
-              "px-3 py-1 rounded text-[11px] font-mono transition-colors",
+              "px-3.5 py-1.5 rounded-md text-xs font-mono transition-colors",
               activeNavPage === item.page
-                ? "text-[#0A84FF] bg-[#0A84FF]/10"
-                : "text-[#9EB1C4] hover:text-[#F4F7FB]"
+                ? "xcode-segment-active"
+                : "text-[#829CB4] hover:text-[#B6D5EF] hover:bg-[#183D63]/45"
             )}
           >
             {item.label}
@@ -58,28 +55,30 @@ export function Toolbar({
 
       <div className="flex-1" />
 
-      <div className="flex items-center gap-1.5">
+      <div className="toolbar-actions flex items-center gap-1.5">
         <a
-          href="#"
-          className="inline-flex items-center gap-1.5 px-3 py-1 rounded text-[11px] font-mono text-[#9EB1C4] hover:text-[#F4F7FB] border border-[#294F70] hover:border-[#0A84FF]/40 transition-colors"
+          href={RESUME_PATH}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="xcode-tool-button inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors"
         >
           <Download size={11} />
           Resume
         </a>
         <a
-          href="https://github.com"
+          href={SOCIAL_LINKS.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-3 py-1 rounded text-[11px] font-mono text-[#9EB1C4] hover:text-[#F4F7FB] border border-[#294F70] hover:border-[#0A84FF]/40 transition-colors"
+          className="xcode-tool-button inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors"
         >
           <Github size={11} />
           GitHub
         </a>
         <a
-          href="https://linkedin.com"
+          href={SOCIAL_LINKS.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-3 py-1 rounded text-[11px] font-mono bg-[#0A84FF] text-white hover:bg-[#0070d4] transition-colors"
+          className="xcode-tool-button inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors"
         >
           <Linkedin size={11} />
           LinkedIn

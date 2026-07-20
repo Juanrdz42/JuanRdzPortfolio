@@ -10,22 +10,22 @@ export function LeadershipPage() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.22 }}
-      className="max-w-[820px] mx-auto px-10 py-9"
+      className="max-w-[960px] mx-auto px-12 py-11"
     >
       <div className="mb-8">
-        <p className="text-[10px] font-mono text-[#0A84FF] uppercase tracking-[0.15em] mb-2">Involvement</p>
-        <h1 className="text-3xl font-semibold text-[#F4F7FB] tracking-tight">Leadership</h1>
+        <p className="text-xs font-mono text-[var(--xcode-orange-soft)] uppercase tracking-[0.15em] mb-2">Involvement</p>
+        <h1 className="text-4xl font-semibold text-[#F4F7FB] tracking-tight">Leadership</h1>
       </div>
 
-      <div className="relative rounded-2xl overflow-hidden border border-[#294F70] mb-8 bg-[#04111F]">
+      <div className="glass-card relative rounded-2xl overflow-hidden mb-8">
         <img
           src={ld.image}
-          alt="SEITC leadership"
+          alt="Temporary placeholder for SEITC leadership"
           className="w-full h-56 object-cover opacity-80"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#07182C]/85 via-[#07182C]/20 to-transparent" />
         <div className="absolute bottom-6 left-7">
-          <p className="text-[10px] font-mono text-[#0A84FF] uppercase tracking-[0.15em] mb-1">{ld.role}</p>
+          <p className="text-[10px] font-mono text-[var(--xcode-orange-soft)] uppercase tracking-[0.15em] mb-1">{ld.role}</p>
           <h2 className="text-2xl font-semibold text-[#F4F7FB] tracking-tight">{ld.org}</h2>
           <p className="text-[#9EB1C4] text-xs font-mono mt-0.5">{ld.fullName}</p>
         </div>

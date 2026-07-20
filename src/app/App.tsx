@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { EditorTabs } from "./components/layout/EditorTabs";
+import { EmptyEditor } from "./components/layout/EmptyEditor";
 import { Sidebar } from "./components/layout/Sidebar";
 import { Toolbar } from "./components/layout/Toolbar";
 import { projects } from "./data/portfolio";
@@ -8,22 +10,25 @@ import { ExperiencePage } from "./pages/ExperiencePage";
 import { HomePage } from "./pages/HomePage";
 import { LeadershipPage } from "./pages/LeadershipPage";
 import { ProjectPage } from "./pages/ProjectPage";
+import { useEditorTabs } from "./hooks/useEditorTabs";
 import type { Page } from "./types/portfolio";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<Page>("home");
   const mainRef = useRef<HTMLElement>(null);
+  const { tabs, activePage, openTab, activateTab, closeTab } = useEditorTabs();
 
   const navigate = (page: Page) => {
-    setCurrentPage(page);
+    openTab(page);
   };
 
   useEffect(() => {
     mainRef.current?.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [currentPage]);
+  }, [activePage]);
 
   const renderPage = () => {
-    switch (currentPage) {
+    if (!activePage) return <EmptyEditor />;
+
+    switch (activePage) {
       case "home":
         return <HomePage onNavigate={navigate} />;
       case "about":
@@ -37,7 +42,7 @@ export default function App() {
       case "project-oasis":
       case "project-ensenname":
       case "project-awaq": {
-        const project = projects.find((p) => p.id === currentPage);
+        const project = projects.find((p) => p.id === activePage);
         if (!project) return <HomePage onNavigate={navigate} />;
         return <ProjectPage project={project} onBack={() => navigate("home")} />;
       }
@@ -48,22 +53,29 @@ export default function App() {
 
   return (
     <div
-      className="h-screen w-screen overflow-hidden"
+      className="portfolio-shell xcode-shell h-screen w-screen overflow-hidden"
       style={{
-        display: "grid",
-        gridTemplateRows: "40px 1fr",
-        gridTemplateColumns: "216px 1fr",
         fontFamily: "'Inter', sans-serif",
       }}
     >
-      <Toolbar currentPage={currentPage} onNavigate={navigate} />
-      <Sidebar currentPage={currentPage} onNavigate={navigate} />
-      <main
-        ref={mainRef}
-        className="overflow-y-auto bg-[#07182C] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      <Toolbar currentPage={activePage} onNavigate={navigate} />
+      <Sidebar currentPage={activePage} onNavigate={navigate} />
+      <div
+        className={`${activePage ? "xcode-workspace" : "empty-workspace"} flex min-h-0 min-w-0 flex-col overflow-hidden`}
       >
-        {renderPage()}
-      </main>
+        <EditorTabs
+          tabs={tabs}
+          activePage={activePage}
+          onActivate={activateTab}
+          onClose={closeTab}
+        />
+        <main
+          ref={mainRef}
+          className="min-h-0 flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {renderPage()}
+        </main>
+      </div>
     </div>
   );
 }

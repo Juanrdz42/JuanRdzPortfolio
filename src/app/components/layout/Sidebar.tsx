@@ -1,104 +1,112 @@
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronDown, ChevronRight, FileCode, Folder, FolderOpen } from "lucide-react";
 import { clsx } from "clsx";
+import {
+  navigationGroups,
+  rootFiles,
+  trailingFiles,
+  type NavigationFile,
+} from "../../data/navigation";
 import type { Page } from "../../types/portfolio";
 
 export function Sidebar({
   currentPage,
   onNavigate,
 }: {
-  currentPage: Page;
+  currentPage: Page | null;
   onNavigate: (page: Page) => void;
 }) {
-  const [projectsOpen, setProjectsOpen] = useState(true);
-  const [leadershipOpen, setLeadershipOpen] = useState(true);
+  const reduceMotion = useReducedMotion();
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
+    projects: true,
+    leadership: true,
+  });
 
-  const fileItem = (label: string, page: Page, depth = 0) => (
-    <button
-      key={page}
-      onClick={() => onNavigate(page)}
-      className={clsx(
-        "w-full flex items-center gap-2 px-2.5 py-[5px] rounded text-left transition-colors duration-150",
-        depth === 1 && "pl-7",
-        currentPage === page
-          ? "bg-[#0A84FF]/12 text-[#F4F7FB]"
-          : "text-[#9EB1C4] hover:text-[#F4F7FB] hover:bg-white/[0.04]"
-      )}
-    >
-      <FileCode
-        size={12}
-        className={clsx("flex-shrink-0", currentPage === page ? "text-[#0A84FF]" : "opacity-40")}
-      />
-      <span className="text-[11px] font-mono truncate">{label}</span>
-    </button>
-  );
+  const toggleGroup = (groupId: string) => {
+    setOpenGroups((current) => ({ ...current, [groupId]: !current[groupId] }));
+  };
+
+  const renderFile = (file: NavigationFile, nested = false) => {
+    const isActive = currentPage === file.page;
+
+    return (
+      <button
+        key={file.page}
+        type="button"
+        onClick={() => onNavigate(file.page)}
+        className={clsx(
+          "relative flex w-full items-center gap-2.5 rounded-md px-3 py-[7px] text-left transition-colors duration-150",
+          nested && "pl-8",
+          isActive
+            ? "xcode-selection text-[#F4F7FB]"
+            : "text-[#8FA7BC] hover:bg-white/[0.04] hover:text-[#D5E5F3]",
+        )}
+      >
+        {isActive && <span className="absolute bottom-1.5 left-0 top-1.5 w-0.5 rounded-full bg-[#0A84FF]" />}
+        <FileCode
+          size={14}
+          className={clsx("flex-shrink-0", isActive ? "text-[#22A0FF]" : "text-[#526F88]")}
+        />
+        <span className="truncate font-mono text-[13px]">{file.label}</span>
+      </button>
+    );
+  };
 
   return (
-    <aside className="border-r border-[#294F70] bg-[#04111F] flex flex-col overflow-hidden">
-      <div className="flex-1 overflow-y-auto [scrollbar-width:none] py-3.5 px-2">
-        {/* Root folder */}
-        <div className="flex items-center gap-1.5 px-2.5 mb-3">
-          <FolderOpen size={12} className="text-[#0A84FF] flex-shrink-0" />
-          <span className="text-[11px] font-mono text-[#9EB1C4] font-medium truncate">
-            juan-antonio
-          </span>
-        </div>
+    <aside className="glass-sidebar relative z-[1] flex flex-col overflow-hidden">
+      <div className="flex-1 overflow-y-auto px-2.5 py-4 [scrollbar-width:none]">
+        <button
+          type="button"
+          onClick={() => onNavigate("home")}
+          className="mb-3.5 flex w-full items-center gap-2 rounded-md px-3 py-1 text-left text-[#A6BACD] transition-colors hover:text-white"
+        >
+          <FolderOpen size={14} className="flex-shrink-0 text-[#0A84FF]" />
+          <span className="truncate font-mono text-[13px] font-medium">juan-antonio</span>
+        </button>
 
         <div className="space-y-0.5">
-          {fileItem("About.tsx", "about")}
-          {fileItem("Experience.tsx", "experience")}
+          {rootFiles.map((file) => renderFile(file))}
 
-          {/* Projects folder */}
-          <button
-            onClick={() => setProjectsOpen((v) => !v)}
-            className="w-full flex items-center gap-1.5 px-2.5 py-[5px] rounded text-xs text-[#9EB1C4] hover:text-[#F4F7FB] transition-colors hover:bg-white/[0.04]"
-          >
-            {projectsOpen ? (
-              <ChevronDown size={10} className="flex-shrink-0" />
-            ) : (
-              <ChevronRight size={10} className="flex-shrink-0" />
-            )}
-            <Folder size={12} className="text-[#0A84FF]/60 flex-shrink-0" />
-            <span className="text-[11px] font-mono">Projects</span>
-          </button>
+          {navigationGroups.map((group) => {
+            const isOpen = openGroups[group.id];
 
-          {projectsOpen && (
-            <div className="space-y-0.5">
-              {fileItem("Oasis.tsx", "project-oasis", 1)}
-              {fileItem("EnSeñame.tsx", "project-ensenname", 1)}
-              {fileItem("AWAQ.tsx", "project-awaq", 1)}
-            </div>
-          )}
+            return (
+              <div key={group.id}>
+                <button
+                  type="button"
+                  onClick={() => toggleGroup(group.id)}
+                  aria-expanded={isOpen}
+                  className="flex w-full items-center gap-2 rounded-md px-3 py-[7px] text-left text-[13px] text-[#8FA7BC] transition-colors hover:bg-white/[0.04] hover:text-[#D5E5F3]"
+                >
+                  {isOpen ? <ChevronDown size={11} /> : <ChevronRight size={11} />}
+                  <Folder size={14} className="flex-shrink-0 text-[#168FEA]" />
+                  <span className="font-mono">{group.label}</span>
+                </button>
 
-          {/* Leadership folder */}
-          <button
-            onClick={() => setLeadershipOpen((v) => !v)}
-            className="w-full flex items-center gap-1.5 px-2.5 py-[5px] rounded text-xs text-[#9EB1C4] hover:text-[#F4F7FB] transition-colors hover:bg-white/[0.04]"
-          >
-            {leadershipOpen ? (
-              <ChevronDown size={10} className="flex-shrink-0" />
-            ) : (
-              <ChevronRight size={10} className="flex-shrink-0" />
-            )}
-            <Folder size={12} className="text-[#0A84FF]/60 flex-shrink-0" />
-            <span className="text-[11px] font-mono">Leadership</span>
-          </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="space-y-0.5">{group.files.map((file) => renderFile(file, true))}</div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
 
-          {leadershipOpen && (
-            <div className="space-y-0.5">
-              {fileItem("SEITC.tsx", "leadership", 1)}
-            </div>
-          )}
-
-          {fileItem("Contact.tsx", "contact")}
+          {trailingFiles.map((file) => renderFile(file))}
         </div>
       </div>
 
-      {/* Status bar */}
-      <div className="border-t border-[#294F70] px-3 py-2 flex-shrink-0">
-        <p className="text-[10px] font-mono text-[#9EB1C4]/50 truncate">
-          TypeScript JSX · UTF-8
-        </p>
+      <div className="flex-shrink-0 border-t border-[#376B99]/25 px-3 py-2.5">
+        <p className="truncate font-mono text-[11px] text-[#7892AA]">TypeScript JSX · UTF-8</p>
       </div>
     </aside>
   );
