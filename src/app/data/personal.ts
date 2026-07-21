@@ -1,25 +1,35 @@
 export const personal = {
   name: "Juan Antonio Rodríguez Reyna",
   degree: "B.S. in Computer Science and Technology",
-  role: "Software Engineer",
   description:
-    "Computer Science and Technology student with experience building institutional data pipelines, full-stack platforms, IoT systems, and AI-assisted applications. I also lead initiatives that support the academic and professional growth of computing students.",
+    "Hi! I'm a Computer Science and Technology student at Tecnológico de Monterrey who loves building things. I'm always looking for new challenges that push me outside my comfort zone and turn ideas into products with real-world impact. Whether I'm developing software, prototyping hardware, or leading technical initiatives, I enjoy bringing people and technology together to solve meaningful problems.",
   location: "Monterrey, Nuevo León, Mexico",
   university: "Tecnológico de Monterrey",
   specialization: "Computer Science & Technology",
   languages: "Spanish / English / Italian",
-  interests: ["Full-Stack", "Data Engineering", "IoT", "Leadership"],
+  drivenBy: ["Building Products", "Growing Tech Communities", "Learning by Doing"],
+  openTo: ["Software Engineering Internships", "Project Management Internships"],
   email: "juanrodriguez2135@gmail.com",
 } as const;
 
 export const skillGroups = [
-  { category: "Languages", skills: ["Python", "C++", "C#", "JavaScript", "SQL", "Swift", "R", "MATLAB"] },
+  { category: "Languages", skills: ["Python", "C++", "C#", "JavaScript", "SQL", "Swift"] },
   {
-    category: "Frameworks",
-    skills: ["ASP.NET Core MVC", "FastAPI", "React", "Vision Framework", "Core ML", "MQTT", "REST APIs"],
+    category: "Technologies",
+    skills: [
+      "React",
+      "FastAPI",
+      "ASP.NET Core",
+      "MySQL",
+      "Snowflake",
+      "Vision Framework",
+      "Core ML",
+      "Create ML",
+      "Unity",
+      "MQTT",
+      "Git",
+    ],
   },
-  { category: "Databases", skills: ["MySQL", "Snowflake"] },
-  { category: "Tools", skills: ["Git", "GitHub", "VS Code", "Xcode", "Unity", "Arduino IDE"] },
 ] as const;
 
 export const education = {

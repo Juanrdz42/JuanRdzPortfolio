@@ -6,13 +6,19 @@ import type { Page } from "../../types/portfolio";
 interface EditorTabsProps {
   tabs: EditorTab[];
   activePage: Page | null;
+  isContentScrolled: boolean;
   onActivate: (page: Page) => void;
   onClose: (page: Page) => void;
 }
 
-export function EditorTabs({ tabs, activePage, onActivate, onClose }: EditorTabsProps) {
+export function EditorTabs({ tabs, activePage, isContentScrolled, onActivate, onClose }: EditorTabsProps) {
   return (
-    <div className="editor-tabs flex h-10 min-w-0 items-end overflow-x-auto border-b border-[#376B99]/25 px-2 [scrollbar-width:none]">
+    <div
+      className={clsx(
+        "editor-tabs relative z-10 flex h-10 min-w-0 items-end overflow-x-auto border-b border-[#376B99]/25 transition-shadow duration-200 [scrollbar-width:none]",
+        isContentScrolled && "editor-tabs-scrolled",
+      )}
+    >
       {tabs.map((tab) => {
         const isActive = tab.page === activePage;
 

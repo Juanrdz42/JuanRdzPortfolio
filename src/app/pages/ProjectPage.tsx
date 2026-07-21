@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { ExternalLink, Github } from "lucide-react";
 import type { Project } from "../types/portfolio";
 import { BackButton, MetricCard, SectionLabel, TechChip } from "../components/shared/PortfolioUI";
+import { ProjectCarousel } from "../components/shared/ProjectCarousel";
 
 export function ProjectPage({ project, onBack }: { project: Project; onBack: () => void }) {
   return (
@@ -10,16 +11,16 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.22 }}
-      className="max-w-[960px] mx-auto px-12 py-11"
+      className="mx-auto max-w-[960px] px-6 py-8 sm:px-12 sm:py-11"
     >
       <BackButton onClick={onBack} />
 
       {/* Hero */}
-      <div className="glass-card relative rounded-2xl overflow-hidden mb-8">
+      <div className="glass-card relative mb-8 aspect-video overflow-hidden rounded-2xl bg-[#031D31]/70">
         <img
           src={project.image}
-          alt={`Temporary placeholder for ${project.name}`}
-          className="w-full h-64 object-cover"
+          alt={`Portada del proyecto ${project.name}`}
+          className="h-full w-full object-contain"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#07182C]/80 via-[#07182C]/20 to-transparent" />
         <div className="absolute bottom-6 left-7">
@@ -69,7 +70,7 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
         </div>
 
         <div>
-          <SectionLabel>My Contribution</SectionLabel>
+          <SectionLabel>{project.contributionLabel ?? "My Contribution"}</SectionLabel>
           <p className="text-[#9EB1C4] leading-relaxed text-sm">{project.contribution}</p>
         </div>
 
@@ -93,34 +94,50 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
           </div>
         )}
 
-        <div>
-          <SectionLabel>Gallery</SectionLabel>
-          <div className="grid grid-cols-3 gap-3">
-            {project.gallery.map((src, i) => (
-              <div key={i} className="glass-card rounded-xl overflow-hidden">
-                <img
-                  src={src}
-                  alt={`Temporary placeholder ${i + 1} for ${project.name}`}
-                  className="w-full h-36 object-cover opacity-90"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
         {project.challenges && (
           <div>
-            <SectionLabel>Challenges</SectionLabel>
+            <SectionLabel>{project.challengesLabel ?? "Challenges"}</SectionLabel>
             <p className="text-sm leading-relaxed text-[#9EB1C4]">{project.challenges}</p>
           </div>
         )}
 
+        {project.gallery.length > 1 && (
+          <div>
+            <SectionLabel>{project.galleryLabel ?? "Gallery"}</SectionLabel>
+            <ProjectCarousel
+              images={project.gallery}
+              projectName={project.name}
+              labels={project.galleryLabels}
+            />
+          </div>
+        )}
+
         {project.lessons && (
-          <div className="pb-12">
-            <SectionLabel>Lessons Learned</SectionLabel>
+          <div>
+            <SectionLabel>{project.lessonsLabel ?? "Lessons Learned"}</SectionLabel>
             <p className="text-sm leading-relaxed text-[#9EB1C4]">{project.lessons}</p>
           </div>
         )}
+
+        {project.video && (
+          <div>
+            <SectionLabel>{project.videoLabel ?? "Game Demo"}</SectionLabel>
+            <div className="glass-card overflow-hidden rounded-xl bg-black">
+              <video
+                className="aspect-video w-full"
+                controls
+                preload="metadata"
+                poster={project.image}
+                playsInline
+                aria-label={`Video demo de ${project.name}`}
+              >
+                <source src={project.video} type="video/mp4" />
+                Tu navegador no soporta la reproducción de video.
+              </video>
+            </div>
+          </div>
+        )}
+
       </div>
     </motion.div>
   );

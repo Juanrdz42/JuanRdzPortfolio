@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EditorTabs } from "./components/layout/EditorTabs";
 import { EmptyEditor } from "./components/layout/EmptyEditor";
 import { Sidebar } from "./components/layout/Sidebar";
@@ -15,6 +15,7 @@ import type { Page } from "./types/portfolio";
 
 export default function App() {
   const mainRef = useRef<HTMLElement>(null);
+  const [isContentScrolled, setIsContentScrolled] = useState(false);
   const { tabs, activePage, openTab, activateTab, closeTab } = useEditorTabs();
 
   const navigate = (page: Page) => {
@@ -23,6 +24,7 @@ export default function App() {
 
   useEffect(() => {
     mainRef.current?.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    setIsContentScrolled(false);
   }, [activePage]);
 
   const renderPage = () => {
@@ -66,11 +68,13 @@ export default function App() {
         <EditorTabs
           tabs={tabs}
           activePage={activePage}
+          isContentScrolled={isContentScrolled}
           onActivate={activateTab}
           onClose={closeTab}
         />
         <main
           ref={mainRef}
+          onScroll={(event) => setIsContentScrolled(event.currentTarget.scrollTop > 8)}
           className="min-h-0 flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {renderPage()}

@@ -33,23 +33,33 @@ export function CodePreview() {
 
       <div className="overflow-x-auto px-4 py-5 font-mono text-[13px] text-[#D5DEE8] [scrollbar-width:none]">
         <Line number={1}>
+          <span className="text-[var(--xcode-orange-soft)]">export</span>{" "}
           <span className="text-[var(--xcode-orange-soft)]">const</span>{" "}
-          <span className="text-[#46C9D7]">juan</span>{" = {"}
+          <span className="text-[#46C9D7]">profile</span>{" = {"}
         </Line>
         <Line number={2}>
-          {"  "}<span className="text-[#B8C9DA]">role</span>: <span className="text-[#FF7AB2]">&quot;{personal.role}&quot;</span>,
+          {"  "}<span className="text-[#B8C9DA]">university</span>: <span className="text-[#FF7AB2]">&quot;{personal.university}&quot;</span>,
         </Line>
-        <Line number={3}>{"  "}<span className="text-[#B8C9DA]">interests</span>: [</Line>
-        {personal.interests.map((interest, index) => (
-          <Line key={interest} number={index + 4}>
-            {"    "}<span className="text-[#FF7AB2]">&quot;{interest}&quot;</span>,
+        <Line number={3}>
+          {"  "}<span className="text-[#B8C9DA]">major</span>: <span className="text-[#FF7AB2]">&quot;{personal.degree}&quot;</span>,
+        </Line>
+        <Line number={4} />
+        <Line number={5}>{"  "}<span className="text-[#B8C9DA]">drivenBy</span>: [</Line>
+        {personal.drivenBy.map((passion, index) => (
+          <Line key={passion} number={index + 6}>
+            {"    "}<span className="text-[#FF7AB2]">&quot;{passion}&quot;</span>,
           </Line>
         ))}
-        <Line number={8}>{"  "}],</Line>
-        <Line number={9}>
-          {"  "}<span className="text-[#B8C9DA]">location</span>: <span className="text-[#FF7AB2]">&quot;{personal.location}&quot;</span>,
-        </Line>
-        <Line number={10}>{"};"}</Line>
+        <Line number={9}>{"  "}],</Line>
+        <Line number={10} />
+        <Line number={11}>{"  "}<span className="text-[#B8C9DA]">openTo</span>: [</Line>
+        {personal.openTo.map((opportunity, index) => (
+          <Line key={opportunity} number={index + 12}>
+            {"    "}<span className="text-[#FF7AB2]">&quot;{opportunity}&quot;</span>,
+          </Line>
+        ))}
+        <Line number={14}>{"  "}]</Line>
+        <Line number={15}>{"};"}</Line>
       </div>
     </motion.aside>
   );
