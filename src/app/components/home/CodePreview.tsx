@@ -37,29 +37,22 @@ export function CodePreview() {
           <span className="text-[var(--xcode-orange-soft)]">const</span>{" "}
           <span className="text-[#46C9D7]">profile</span>{" = {"}
         </Line>
-        <Line number={2}>
-          {"  "}<span className="text-[#B8C9DA]">university</span>: <span className="text-[#FF7AB2]">&quot;{personal.university}&quot;</span>,
-        </Line>
-        <Line number={3}>
-          {"  "}<span className="text-[#B8C9DA]">major</span>: <span className="text-[#FF7AB2]">&quot;{personal.degree}&quot;</span>,
-        </Line>
-        <Line number={4} />
-        <Line number={5}>{"  "}<span className="text-[#B8C9DA]">drivenBy</span>: [</Line>
+        <Line number={2}>{"  "}<span className="text-[#B8C9DA]">drivenBy</span>: [</Line>
         {personal.drivenBy.map((passion, index) => (
-          <Line key={passion} number={index + 6}>
+          <Line key={passion} number={index + 3}>
             {"    "}<span className="text-[#FF7AB2]">&quot;{passion}&quot;</span>,
           </Line>
         ))}
-        <Line number={9}>{"  "}],</Line>
-        <Line number={10} />
-        <Line number={11}>{"  "}<span className="text-[#B8C9DA]">openTo</span>: [</Line>
+        <Line number={6}>{"  "}],</Line>
+        <Line number={7} />
+        <Line number={8}>{"  "}<span className="text-[#B8C9DA]">openTo</span>: [</Line>
         {personal.openTo.map((opportunity, index) => (
-          <Line key={opportunity} number={index + 12}>
+          <Line key={opportunity} number={index + 9}>
             {"    "}<span className="text-[#FF7AB2]">&quot;{opportunity}&quot;</span>,
           </Line>
         ))}
-        <Line number={14}>{"  "}]</Line>
-        <Line number={15}>{"};"}</Line>
+        <Line number={11}>{"  "}]</Line>
+        <Line number={12}>{"};"}</Line>
       </div>
     </motion.aside>
   );

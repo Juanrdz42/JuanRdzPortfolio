@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { SOCIAL_LINKS } from "../config/site";
 import { personal } from "../data/personal";
+import { BackButton } from "../components/shared/PortfolioUI";
 
 const contactItems = [
   { label: "Email", value: personal.email, href: `mailto:${personal.email}` },
@@ -13,14 +14,15 @@ const contactItems = [
   { label: "Location", value: personal.location, href: null },
 ];
 
-export function ContactPage() {
+export function ContactPage({ onBack }: { onBack: () => void }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.22 }}
-      className="mx-auto max-w-[960px] px-12 py-11"
+      className="mx-auto max-w-[960px] px-6 py-8 sm:px-12 sm:py-11"
     >
+      <BackButton onClick={onBack} />
       <div className="mb-8">
         <p className="mb-2 font-mono text-xs uppercase tracking-[0.15em] text-[var(--xcode-orange-soft)]">
           Get in touch

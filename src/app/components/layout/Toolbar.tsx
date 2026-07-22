@@ -5,7 +5,6 @@ import { RESUME_PATH, SOCIAL_LINKS } from "../../config/site";
 import {
   navigationGroups,
   rootFiles,
-  topNavigation,
   trailingFiles,
   type NavigationFile,
 } from "../../data/navigation";
@@ -20,10 +19,6 @@ export function Toolbar({
   onNavigate: (page: Page) => void;
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const isProjectPage = currentPage?.startsWith("project-") ?? false;
-  const activeNavPage =
-    isProjectPage ? "home" : currentPage;
-
   return (
     <header className="xcode-titlebar relative z-10 col-span-2 h-14 flex-shrink-0 flex items-center px-5 gap-3.5">
       {/* Traffic lights */}
@@ -43,24 +38,6 @@ export function Toolbar({
       </button>
 
       <span className="h-3.5 w-px bg-[#294F70]" />
-
-      <nav className="toolbar-navigation xcode-segmented hidden items-center overflow-x-auto rounded-lg p-0.5 [scrollbar-width:none] sm:flex">
-        {topNavigation.map((item) => (
-          <button
-            key={item.page}
-            type="button"
-            onClick={() => onNavigate(item.page)}
-            className={clsx(
-              "px-3.5 py-1.5 rounded-md text-xs font-mono transition-colors",
-              activeNavPage === item.page
-                ? "xcode-segment-active"
-                : "text-[#829CB4] hover:text-[#B6D5EF] hover:bg-[#183D63]/45"
-            )}
-          >
-            {item.label}
-          </button>
-        ))}
-      </nav>
 
       <div className="flex-1" />
 

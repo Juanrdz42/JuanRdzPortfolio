@@ -19,6 +19,7 @@ export function Sidebar({
 }) {
   const reduceMotion = useReducedMotion();
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
+    experience: true,
     projects: true,
     leadership: true,
   });

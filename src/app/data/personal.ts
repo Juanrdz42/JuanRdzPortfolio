@@ -2,7 +2,7 @@ export const personal = {
   name: "Juan Antonio Rodríguez Reyna",
   degree: "B.S. in Computer Science and Technology",
   description:
-    "Hi! I'm a Computer Science and Technology student at Tecnológico de Monterrey who loves building things. I'm always looking for new challenges that push me outside my comfort zone and turn ideas into products with real-world impact. Whether I'm developing software, prototyping hardware, or leading technical initiatives, I enjoy bringing people and technology together to solve meaningful problems.",
+    "Hi! I'm a Computer Science and Technology student at Tecnológico de Monterrey who loves building things. I enjoy taking on projects that push me to learn new technologies and solve problems I haven't seen before. Whether it's developing software, prototyping hardware, or leading technical initiatives, I'm happiest when I'm building something that didn't exist before.",
   location: "Monterrey, Nuevo León, Mexico",
   university: "Tecnológico de Monterrey",
   specialization: "Computer Science & Technology",
@@ -24,7 +24,6 @@ export const skillGroups = [
       "Snowflake",
       "Vision Framework",
       "Core ML",
-      "Create ML",
       "Unity",
       "MQTT",
       "Git",

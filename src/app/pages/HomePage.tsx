@@ -12,6 +12,7 @@ export function HomePage({ onNavigate }: { onNavigate: (page: Page) => void }) {
   const projectsRef = useRef<HTMLElement>(null);
   const experienceRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const orderedProjects = [...projects.filter((project) => project.id !== "project-oasis"), ...projects.filter((project) => project.id === "project-oasis")];
 
   const scrollToProjects = () => {
     projectsRef.current?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
@@ -38,7 +39,7 @@ export function HomePage({ onNavigate }: { onNavigate: (page: Page) => void }) {
           </p>
 
           <div className="flex flex-col gap-5">
-            {projects.map((project) => (
+            {orderedProjects.map((project) => (
               <button
                 key={project.id}
                 type="button"

@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ExternalLink, Github } from "lucide-react";
+import { Calendar, ExternalLink, Github } from "lucide-react";
 import type { Project } from "../types/portfolio";
 import { BackButton, MetricCard, SectionLabel, TechChip } from "../components/shared/PortfolioUI";
 import { ProjectCarousel } from "../components/shared/ProjectCarousel";
@@ -15,27 +15,37 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
     >
       <BackButton onClick={onBack} />
 
-      {/* Hero */}
+      <div className="mb-8">
+        <h1 className="text-[42px] font-semibold tracking-tight text-[#F4F7FB]">{project.name}</h1>
+        <p className="mt-1 text-base text-[#9EB1C4]">{project.tagline}</p>
+        {project.nameExplanation && (
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#7897B2]">{project.nameExplanation}</p>
+        )}
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {project.period && (
+            <span className="mr-2 inline-flex items-center gap-1.5 font-mono text-xs text-[#9EB1C4]">
+              <Calendar size={12} /> {project.period}
+            </span>
+          )}
+          {project.tech.map((technology) => <TechChip key={technology} label={technology} />)}
+        </div>
+      </div>
+
+      <div className="mb-9">
+        <SectionLabel>Overview</SectionLabel>
+        <p className="text-sm leading-relaxed text-[#9EB1C4]">{project.overview}</p>
+      </div>
+
       <div className="glass-card relative mb-8 aspect-video overflow-hidden rounded-2xl bg-[#031D31]/70">
         <img
           src={project.image}
           alt={`Portada del proyecto ${project.name}`}
           className="h-full w-full object-contain"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#07182C]/80 via-[#07182C]/20 to-transparent" />
-        <div className="absolute bottom-6 left-7">
-          <h1 className="text-[42px] font-semibold text-[#F4F7FB] tracking-tight mb-1">{project.name}</h1>
-          <p className="text-[#9EB1C4] text-base">{project.tagline}</p>
-        </div>
       </div>
 
-      {/* Tech + Buttons row */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-9">
-        <div className="flex flex-wrap gap-1.5">
-          {project.tech.map((t) => (
-            <TechChip key={t} label={t} />
-          ))}
-        </div>
+      {/* Project links */}
+      {(project.github || project.demo) && <div className="mb-9 flex flex-wrap justify-end gap-2">
         <div className="flex gap-2">
           {project.github && (
             <a
@@ -60,15 +70,24 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
             </a>
           )}
         </div>
-      </div>
+      </div>}
+
+      {project.features && project.features.length > 0 && (
+        <div className="mb-9">
+          <SectionLabel>Features</SectionLabel>
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {project.features.map((feature) => (
+              <div key={feature} className="glass-inset flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-[#C1D1E0]">
+                <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#0A84FF]" />
+                {feature}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Content sections */}
       <div className="space-y-9">
-        <div>
-          <SectionLabel>Overview</SectionLabel>
-          <p className="text-[#9EB1C4] leading-relaxed text-sm">{project.overview}</p>
-        </div>
-
         <div>
           <SectionLabel>{project.contributionLabel ?? "My Contribution"}</SectionLabel>
           <p className="text-[#9EB1C4] leading-relaxed text-sm">{project.contribution}</p>

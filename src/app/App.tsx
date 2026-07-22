@@ -6,10 +6,12 @@ import { Toolbar } from "./components/layout/Toolbar";
 import { projects } from "./data/portfolio";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
+import { CiberistasPage } from "./pages/CiberistasPage";
 import { ExperiencePage } from "./pages/ExperiencePage";
 import { HomePage } from "./pages/HomePage";
 import { LeadershipPage } from "./pages/LeadershipPage";
 import { ProjectPage } from "./pages/ProjectPage";
+import { RuntimePage } from "./pages/RuntimePage";
 import { useEditorTabs } from "./hooks/useEditorTabs";
 import type { Page } from "./types/portfolio";
 
@@ -34,13 +36,17 @@ export default function App() {
       case "home":
         return <HomePage onNavigate={navigate} />;
       case "about":
-        return <AboutPage />;
+        return <AboutPage onBack={() => navigate("home")} />;
       case "experience":
-        return <ExperiencePage />;
+        return <ExperiencePage onBack={() => navigate("home")} />;
       case "leadership":
-        return <LeadershipPage />;
+        return <LeadershipPage onBack={() => navigate("home")} />;
+      case "leadership-ciberistas":
+        return <CiberistasPage onBack={() => navigate("home")} />;
+      case "leadership-runtime":
+        return <RuntimePage onBack={() => navigate("home")} />;
       case "contact":
-        return <ContactPage />;
+        return <ContactPage onBack={() => navigate("home")} />;
       case "project-oasis":
       case "project-ensenname":
       case "project-awaq": {

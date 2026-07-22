@@ -1,10 +1,10 @@
 import { motion, useReducedMotion } from "motion/react";
 import { Calendar } from "lucide-react";
 import { leadershipData } from "../data/portfolio";
-import { SectionLabel } from "../components/shared/PortfolioUI";
+import { BackButton, SectionLabel } from "../components/shared/PortfolioUI";
 import { ProjectCarousel } from "../components/shared/ProjectCarousel";
 
-export function LeadershipPage() {
+export function LeadershipPage({ onBack }: { onBack: () => void }) {
   const ld = leadershipData;
   return (
     <motion.div
@@ -13,9 +13,22 @@ export function LeadershipPage() {
       transition={{ duration: 0.22 }}
       className="mx-auto max-w-[960px] px-6 py-8 sm:px-12 sm:py-11"
     >
+      <BackButton onClick={onBack} />
       <div className="mb-8">
-        <p className="text-xs font-mono text-[var(--xcode-orange-soft)] uppercase tracking-[0.15em] mb-2">Involvement</p>
-        <h1 className="text-4xl font-semibold text-[#F4F7FB] tracking-tight">Leadership</h1>
+        <p className="mb-2 font-mono text-xs uppercase tracking-[0.15em] text-[var(--xcode-orange-soft)]">Leadership &amp; Outreach</p>
+        <h1 className="text-4xl font-semibold text-[#F4F7FB] tracking-tight">{ld.org}</h1>
+        <p className="mt-2 text-base text-[#A7BACD]">{ld.role}, {ld.fullName}</p>
+        <p className="mt-4 flex items-center gap-2 font-mono text-xs text-[#9EB1C4]"><Calendar size={12} />{ld.period}</p>
+        <div className="glass-inset mt-5 inline-flex items-center gap-3 rounded-lg border border-dashed border-[#6AA3D8]/30 px-4 py-2.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--xcode-orange)]" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--xcode-orange-soft)]">More coming soon</span>
+          <span className="hidden text-xs text-[#9EB1C4] sm:inline">Our term is just getting started.</span>
+        </div>
+      </div>
+
+      <div className="mb-9">
+        <SectionLabel>Overview</SectionLabel>
+        <p className="whitespace-pre-line text-sm leading-relaxed text-[#9EB1C4]">{ld.overview}</p>
       </div>
 
       <div className="glass-card relative mb-8 aspect-video overflow-hidden rounded-2xl bg-[#031D31]/70">
@@ -32,17 +45,7 @@ export function LeadershipPage() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 text-xs font-mono text-[#9EB1C4] mb-7">
-        <Calendar size={12} />
-        {ld.period}
-      </div>
-
       <div className="space-y-9 pb-12">
-        <div>
-          <SectionLabel>Overview</SectionLabel>
-          <p className="whitespace-pre-line text-sm leading-relaxed text-[#9EB1C4]">{ld.overview}</p>
-        </div>
-
         <div>
           <SectionLabel>My Journey</SectionLabel>
           <JourneyTimeline journey={ld.journey} />
@@ -66,12 +69,19 @@ export function LeadershipPage() {
           <p className="text-sm leading-relaxed text-[#9EB1C4]">{ld.whyItMatters}</p>
         </div>
 
-        {ld.gallery.length > 1 && (
+        {ld.gallery.length > 0 && (
           <div>
             <SectionLabel>Gallery</SectionLabel>
-            <ProjectCarousel images={ld.gallery} projectName={ld.org} />
+            {ld.gallery.length > 1 ? (
+              <ProjectCarousel images={ld.gallery} projectName={ld.org} />
+            ) : (
+              <div className="glass-card aspect-video overflow-hidden rounded-xl bg-[#031D31]/70">
+                <img src={ld.gallery[0]} alt={`${ld.org} team`} className="h-full w-full object-contain" />
+              </div>
+            )}
           </div>
         )}
+
       </div>
     </motion.div>
   );

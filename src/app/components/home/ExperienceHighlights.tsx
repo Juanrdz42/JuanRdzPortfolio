@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { Calendar, ChevronRight } from "lucide-react";
-import { experiences, leadershipData } from "../../data/portfolio";
+import { ciberistasData, experiences, leadershipData, runtimeData } from "../../data/portfolio";
 import type { Page } from "../../types/portfolio";
 
 export const ExperienceHighlights = forwardRef<HTMLElement, { onNavigate: (page: Page) => void }>(
@@ -10,12 +10,39 @@ export const ExperienceHighlights = forwardRef<HTMLElement, { onNavigate: (page:
       page: Page;
       eyebrow: string;
       title: string;
-      description: string;
-      period: string;
+      description?: string;
+      period?: string;
       image: string;
       alt: string;
       lightBackground?: boolean;
     }> = [
+      {
+        page: "leadership",
+        eyebrow: "Leadership Experience",
+        title: `${leadershipData.role}, ${leadershipData.org}`,
+        description: leadershipData.overview.split("\n\n")[0],
+        period: leadershipData.period,
+        image: leadershipData.image,
+        alt: "SEITC leadership",
+      },
+      {
+        page: "leadership-ciberistas",
+        eyebrow: "Leadership Experience",
+        title: "Ciberistas",
+        description: ciberistasData.overview,
+        period: ciberistasData.period,
+        image: "/images/leadership/ciberistas/ciberistas.png",
+        alt: "Ciberistas",
+      },
+      {
+        page: "leadership-runtime",
+        eyebrow: "Leadership Experience",
+        title: "Runtime",
+        description: `${runtimeData.subtitle}. ${runtimeData.description}`,
+        period: runtimeData.period,
+        image: runtimeData.image,
+        alt: "Runtime",
+      },
       {
         page: "experience",
         eyebrow: "Professional Experience",
@@ -26,22 +53,13 @@ export const ExperienceHighlights = forwardRef<HTMLElement, { onNavigate: (page:
         alt: "Tecnológico de Monterrey",
         lightBackground: true,
       },
-      {
-        page: "leadership",
-        eyebrow: "Leadership Experience",
-        title: `${leadershipData.role}, ${leadershipData.org}`,
-        description: leadershipData.overview.split("\n\n")[0],
-        period: leadershipData.period,
-        image: leadershipData.image,
-        alt: "SEITC leadership",
-      },
     ];
 
     return (
       <section ref={ref} className="scroll-mt-4 border-b border-[#6AA3D8]/20 px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
         <div className="mx-auto max-w-[1180px]">
           <p className="mb-7 font-mono text-xs uppercase tracking-[0.15em] text-[var(--xcode-orange-soft)]">
-            Experience
+            Work &amp; Leadership
           </p>
 
           <div className="flex flex-col gap-5">
@@ -81,15 +99,19 @@ export const ExperienceHighlights = forwardRef<HTMLElement, { onNavigate: (page:
                         </span>
                       </div>
 
-                      <p className="mb-5 line-clamp-3 max-w-2xl text-sm leading-relaxed text-[#A7BACD]">
-                        {item.description}
-                      </p>
+                      {item.description && (
+                        <p className="mb-5 line-clamp-3 max-w-2xl text-sm leading-relaxed text-[#A7BACD]">
+                          {item.description}
+                        </p>
+                      )}
                     </div>
 
-                    <span className="flex items-center gap-2 font-mono text-xs text-[#7897B2]">
-                      <Calendar size={13} />
-                      {item.period}
-                    </span>
+                    {item.period && (
+                      <span className="flex items-center gap-2 font-mono text-xs text-[#7897B2]">
+                        <Calendar size={13} />
+                        {item.period}
+                      </span>
+                    )}
                   </div>
                 </div>
               </button>

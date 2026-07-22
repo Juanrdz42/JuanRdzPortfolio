@@ -7,7 +7,7 @@ export interface NavigationFile {
 }
 
 export interface NavigationGroup {
-  id: "projects" | "leadership";
+  id: "experience" | "projects" | "leadership";
   label: string;
   files: NavigationFile[];
 }
@@ -15,10 +15,14 @@ export interface NavigationGroup {
 export const rootFiles: NavigationFile[] = [
   { label: "Home.tsx", page: "home" },
   { label: "About.tsx", page: "about" },
-  { label: "Experience.tsx", page: "experience" },
 ];
 
 export const navigationGroups: NavigationGroup[] = [
+  {
+    id: "experience",
+    label: "Experience",
+    files: [{ label: "DataEngineer.tsx", page: "experience" }],
+  },
   {
     id: "projects",
     label: "Projects",
@@ -30,20 +34,16 @@ export const navigationGroups: NavigationGroup[] = [
   {
     id: "leadership",
     label: "Leadership",
-    files: [{ label: "SEITC.tsx", page: "leadership" }],
+    files: [
+      { label: "SEITC.tsx", page: "leadership" },
+      { label: "Ciberistas.tsx", page: "leadership-ciberistas" },
+      { label: "Runtime.tsx", page: "leadership-runtime" },
+    ],
   },
 ];
 
 export const trailingFiles: NavigationFile[] = [
   { label: "Contact.tsx", page: "contact" },
-];
-
-export const topNavigation: Array<{ label: string; page: Page }> = [
-  { label: "About", page: "about" },
-  { label: "Experience", page: "experience" },
-  { label: "Projects", page: "home" },
-  { label: "Leadership", page: "leadership" },
-  { label: "Contact", page: "contact" },
 ];
 
 const pageLabels = new Map<Page, string>([

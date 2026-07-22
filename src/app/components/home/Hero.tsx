@@ -51,7 +51,7 @@ export function Hero({
                 onClick={onViewExperience}
                 className="xcode-secondary-button inline-flex h-11 items-center gap-2 rounded-lg px-5 font-mono text-sm transition-colors"
               >
-                Experience
+                Work &amp; Leadership
                 <ChevronRight size={15} />
               </button>
               <a

@@ -43,20 +43,23 @@ export const projects: Project[] = [
     id: "project-ensenname",
     name: "EnSéñame",
     tagline: "AI-assisted Mexican Sign Language learning app",
+    nameExplanation:
+      "The name combines seña (sign) and enséñame (\"teach me\"), reflecting the goal of learning Mexican Sign Language through practice.",
     description:
       "An iOS application that teaches Mexican Sign Language through real-time hand gesture recognition, interactive lessons, and AI-assisted feedback.",
     image: "/images/projects/ensenname/ensename.png",
-    tech: ["Swift", "Vision Framework", "Core ML", "Create ML"],
+    tech: ["Swift", "Vision Framework", "Core ML"],
+    features: ["Guided Lessons", "Practice Mode", "Sign Dictionary", "AI Feedback", "Real-Time Recognition"],
     overview:
       "Learning a Sign Language often means memorizing static images or videos, making it difficult to practice and receive immediate feedback. During a 48-hour hackathon, our team built EnSéñame, an iOS application that turns sign language practice into an interactive learning experience using real-time hand pose detection, guided lessons, and instant feedback. Our goal was to make learning LSM (Mexican Sign Language) feel closer to Duolingo than to a dictionary.",
     contribution:
-      "I developed the computer vision pipeline using Apple's Vision Framework and Core ML to recognize Mexican Sign Language gestures in real time. Beyond the computer vision pipeline, I helped design the learning experience by implementing guided lessons, practice challenges, and a sign dictionary, making the application feel more like an educational platform than a simple gesture classifier.",
+      "I developed the computer vision pipeline using Apple's Vision Framework and Core ML to recognize Mexican Sign Language gestures in real time. Besides building the computer vision pipeline, I also helped design the learning experience by implementing guided lessons, practice challenges, and a sign dictionary, making the application feel more like an educational platform than a simple gesture classifier.",
     contributionLabel: "My Role",
     challenges:
       "One of the biggest challenges was balancing accuracy with the limited time of a 48-hour hackathon. We quickly realized that training a single model to recognize every sign produced inconsistent results, so we changed our approach and trained separate models for different lesson categories. That decision significantly improved recognition accuracy and allowed us to deliver a much more reliable experience before the deadline.",
     challengesLabel: "Biggest Challenge",
     lessons:
-      "This project showed me how quickly ideas can evolve when you're building under pressure. In just 48 hours, I learned how to train computer vision models, integrate them into an iOS application, design an experience around real-time feedback instead of simply making predictions, and even picked up the basics of Mexican Sign Language along the way. It also reinforced something I enjoy about engineering: solving problems often means changing your approach instead of forcing your original solution to work.",
+      "Before this hackathon, I had never trained a computer vision model or built an iOS app. In 48 hours, I learned both. More importantly, I learned that the first solution is rarely the right one, and sometimes changing direction completely is what makes a project work.",
     lessonsLabel: "What I Learned",
     gallery: ["/images/projects/ensenname/ensename.png"],
   },
@@ -125,10 +128,9 @@ export const leadershipData = {
   fullName: "Computer Science Student Society, ITESM",
   role: "President",
   period: "May 2026 – Present",
-  image: "/images/leadership/seitc.png",
+  image: "/images/leadership/seitc/seitc.png",
   gallery: [
-    "/images/leadership/seitc.png",
-    "/images/leadership/seitc1.png",
+    "/images/leadership/seitc/seitc1.png",
   ],
   overview:
     "Ever since I started my Computer Science degree, I knew I wanted to be part of SEITC. As a freshman, I looked up to the students organizing technical workshops, networking events, and activities that brought our community together. I wanted to contribute to that same mission someday.\n\nI joined as Social Responsibility Coordinator during my first year, later served as Finance Coordinator, and today I have the privilege of leading the organization as President. Looking back, it's incredible to realize that I went from attending SEITC events as a new student to helping shape the experience for the next generation of Computer Science students.",
@@ -154,4 +156,77 @@ export const leadershipData = {
     { label: "Applicants Interviewed", value: "20+" },
     { label: "Campus Workshop", value: "4 hours" },
   ],
+};
+
+export const ciberistasData = {
+  name: "Ciberistas",
+  period: "July 2026",
+  image: "/images/leadership/ciberistas/ciberistas.png",
+  overview:
+    "I've always enjoyed building software, but teaching it turned out to be just as rewarding. Joining Ciberistas gave me the opportunity to introduce elementary and middle school students to programming through hands-on HTML, CSS, and JavaScript workshops. Many of them had never written code before or even used a computer before, so it was really fun watching them build their first webpage and realize they could create something on their own. Watching students realize they could actually build something instead of just using technology made every workshop worth it.",
+  role: [
+    "I helped prepare the lessons, design the exercises, and teach the workshops. Since every student learned at a different pace, I was constantly answering questions, helping students debug their code, and finding new ways to explain concepts that I normally took for granted.",
+    "One thing I cared about was making every class practical. Rather than spending hours explaining theory, I wanted students to leave with something they had actually built and understand what they did. Whether it was their first webpage or a small interactive project with JavaScript, I wanted them to finish the day thinking, \"I made this.\"",
+  ],
+  challenge:
+    "The biggest challenge wasn't teaching HTML or JavaScript. It was learning how to see programming from the perspective of someone who had never done it before. And yes, keeping a classroom full of kids focused was an adventure on its own. There were moments when I realized I was moving too fast because something that felt obvious to me was completely new for the students. Sometimes the challenge wasn't even the code. It was learning how folders worked, understanding what a browser actually does, or figuring out why a file wasn't saving where they expected. That experience taught me to slow down, adapt my explanations, and focus less on covering as much content as possible and more on making sure everyone understood what they were building.",
+  lessons:
+    "Looking back, Ciberistas gave me a completely different perspective on programming. It reminded me that not everyone starts from the same place, and that explaining an idea clearly can sometimes be harder than implementing it. It's also one of the reasons I enjoy organizing workshops through SEITC today. Seeing someone build their first project is still just as satisfying.",
+  classGallery: [
+    "/images/leadership/ciberistas/IMG_0246.jpg",
+    "/images/leadership/ciberistas/IMG_0249.jpg",
+    "/images/leadership/ciberistas/IMG_0256.jpg",
+    "/images/leadership/ciberistas/IMG_0280.jpg",
+    "/images/leadership/ciberistas/IMG_0314.jpg",
+    "/images/leadership/ciberistas/IMG_0329.jpg",
+    "/images/leadership/ciberistas/IMG_0344.jpg",
+    "/images/leadership/ciberistas/IMG_9386.JPG",
+    "/images/leadership/ciberistas/IMG_9389.JPG",
+    "/images/leadership/ciberistas/IMG_9390.JPG",
+    "/images/leadership/ciberistas/IMG_9394.JPG",
+    "/images/leadership/ciberistas/IMG_9400.JPG",
+  ],
+  diplomaGallery: [
+    "/images/leadership/ciberistas/IMG_9401.JPG",
+    "/images/leadership/ciberistas/IMG_9403.JPG",
+    "/images/leadership/ciberistas/IMG_9404.JPG",
+    "/images/leadership/ciberistas/IMG_9415.JPG",
+    "/images/leadership/ciberistas/IMG_9416.JPG",
+    "/images/leadership/ciberistas/IMG_9417.JPG",
+  ],
+};
+
+export const runtimeData = {
+  name: "Runtime",
+  subtitle: "The campaign behind becoming SEITC President",
+  description:
+    "Together with my vice president, Iván, I built a multi-week campaign from the ground up. We developed our proposals, prepared for the debate, connected with students, and worked to earn their trust before being elected to lead SEITC for the 2026–2027 term.",
+  period: "2026 SEITC Election",
+  image: "/images/leadership/runtime/Runtime_PropuestasDeCandidatura (1).png",
+  overview:
+    "Most people only see the title, but becoming President of SEITC was a process that lasted several weeks. Together with my vice president, Iván, we built our campaign from the ground up, preparing presentations, organizing our proposals, designing campaign materials, and spending countless hours thinking about what we wanted the next year of SEITC to look like. We weren't the only team running. Another candidacy, Ascend, was competing for the same position, which made every event feel that much more important.",
+  stages: [
+    {
+      title: "Integration Day",
+      text: "Integration Day was our first opportunity to meet students outside the classroom and share what Runtime stood for. We set up our table, handed out notebooks, brownies and cookies, but those were really just conversation starters. The best part of the day was talking to people about their ideas, answering questions, and hearing what they felt SEITC was missing. By the end of the afternoon I had probably repeated our proposal dozens of times, but every conversation was a little different.",
+    },
+    {
+      title: "Debate",
+      text: "If there was one moment that made me nervous, it was the debate. Both candidacies answered questions from students and the moderator about our plans, leadership, and the future of the organization. There wasn't much time to think before answering, so the only option was to trust the work we had done preparing the campaign. Looking back, it ended up being one of my favorite parts because it pushed us to explain not only what we wanted to do, but why we believed it would make a difference.",
+    },
+    {
+      title: "Campaign Closing",
+      text: "The last day before voting had a completely different atmosphere. Every candidacy was out talking with students one final time, giving out campaign materials and answering last-minute questions. By then, most people already knew who we were, so the conversations felt much more personal. Instead of introducing ourselves, we spent the day listening, thanking people for their support, and hoping we had earned their trust.",
+    },
+    {
+      title: "Defense Meeting",
+      text: "Before the election results became official, every candidacy had the opportunity to respond to observations submitted during the electoral process. Ascend presented their defense, while Runtime received no observations, so we simply waited for the final vote count. It was probably the quietest part of the campaign, but also one of the most nerve-racking because everything was already out of our hands.",
+    },
+    {
+      title: "Election Results",
+      text: "When the results were announced, Runtime received the majority of votes and we were elected to lead SEITC for the 2026–2027 term. Winning was an incredible feeling, but what stayed with me the most wasn't the result itself. It was realizing how many people had trusted our vision enough to vote for us. That responsibility mattered a lot more than the title.",
+    },
+  ],
+  reflection:
+    "The campaign taught me lessons that I don't think I would have learned anywhere else. I learned how to explain ideas to very different audiences, answer difficult questions without a script, work closely with a teammate under pressure, and accept that not every decision is in your control. More than anything, it reminded me that leadership starts long before you're elected. It starts with listening, showing up consistently, and following through on the promises you make.",
 };

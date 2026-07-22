@@ -1,9 +1,9 @@
 import { motion } from "motion/react";
 import { Calendar, MapPin } from "lucide-react";
 import { experiences } from "../data/portfolio";
-import { SectionLabel, TechChip } from "../components/shared/PortfolioUI";
+import { BackButton, SectionLabel, TechChip } from "../components/shared/PortfolioUI";
 
-export function ExperiencePage() {
+export function ExperiencePage({ onBack }: { onBack: () => void }) {
   const experience = experiences[0];
 
   return (
@@ -13,9 +13,19 @@ export function ExperiencePage() {
       transition={{ duration: 0.22 }}
       className="mx-auto max-w-[960px] px-6 py-8 sm:px-12 sm:py-11"
     >
+      <BackButton onClick={onBack} />
       <div className="mb-8">
-        <p className="text-xs font-mono text-[var(--xcode-orange-soft)] uppercase tracking-[0.15em] mb-2">Career</p>
-        <h1 className="text-4xl font-semibold text-[#F4F7FB] tracking-tight">Experience</h1>
+        <p className="mb-2 font-mono text-xs uppercase tracking-[0.15em] text-[var(--xcode-orange-soft)]">Professional Experience</p>
+        <h1 className="text-4xl font-semibold tracking-tight text-[#F4F7FB]">Data Engineering</h1>
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <span className="mr-2 inline-flex items-center gap-1.5 font-mono text-xs text-[#9EB1C4]"><Calendar size={12} />{experience.period}</span>
+          {experience.tech.map((technology) => <TechChip key={technology} label={technology} />)}
+        </div>
+      </div>
+
+      <div className="mb-9">
+        <SectionLabel>Overview</SectionLabel>
+        <p className="text-sm leading-relaxed text-[#9EB1C4]">{experience.overview}</p>
       </div>
 
       <div className="glass-card mb-8 overflow-hidden rounded-2xl">
@@ -36,15 +46,10 @@ export function ExperiencePage() {
       </div>
 
       <div className="mb-9 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] text-[#9EB1C4]">
-        <span className="flex items-center gap-1.5"><Calendar size={11} />{experience.period}</span>
         <span className="flex items-center gap-1.5"><MapPin size={11} />{experience.location}</span>
       </div>
 
       <div className="space-y-9 pb-12">
-        <div>
-          <SectionLabel>Overview</SectionLabel>
-          <p className="text-sm leading-relaxed text-[#9EB1C4]">{experience.overview}</p>
-        </div>
         <div>
           <SectionLabel>My Responsibilities</SectionLabel>
           <p className="text-sm leading-relaxed text-[#9EB1C4]">{experience.responsibilities}</p>
@@ -56,12 +61,6 @@ export function ExperiencePage() {
         <div>
           <SectionLabel>What I Learned</SectionLabel>
           <p className="text-sm leading-relaxed text-[#9EB1C4]">{experience.lessons}</p>
-        </div>
-        <div>
-          <SectionLabel>Skills</SectionLabel>
-          <div className="flex flex-wrap gap-1.5">
-            {experience.tech.map((technology) => <TechChip key={technology} label={technology} />)}
-          </div>
         </div>
       </div>
     </motion.div>

@@ -1,5 +1,4 @@
 import {
-  BrainCircuit,
   Database,
   Hash,
   ScanEye,
@@ -41,11 +40,13 @@ const lineIcons: Partial<Record<string, LucideIcon>> = {
   "C#": Hash,
   SQL: Database,
   "Vision Framework": ScanEye,
-  "Core ML": BrainCircuit,
-  "Create ML": BrainCircuit,
 };
 
 function TechnologyIcon({ name }: { name: string }) {
+  if (name === "Core ML") {
+    return <span className="font-mono text-[11px] font-semibold tracking-tight" aria-hidden="true">ML</span>;
+  }
+
   const LineIcon = lineIcons[name];
   if (LineIcon) return <LineIcon size={21} strokeWidth={1.8} aria-hidden="true" />;
 

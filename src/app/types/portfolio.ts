@@ -3,6 +3,8 @@ export type Page =
   | "about"
   | "experience"
   | "leadership"
+  | "leadership-ciberistas"
+  | "leadership-runtime"
   | "contact"
   | "project-oasis"
   | "project-ensenname"
@@ -12,9 +14,12 @@ export interface Project {
   id: Page;
   name: string;
   tagline: string;
+  nameExplanation?: string;
+  period?: string;
   description: string;
   image: string;
   tech: string[];
+  features?: string[];
   overview: string;
   contribution: string;
   contributionLabel?: string;
