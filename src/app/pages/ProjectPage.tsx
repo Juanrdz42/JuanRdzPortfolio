@@ -360,7 +360,7 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
                       playsInline
                       aria-label={`Video demo de ${project.name}`}
                     >
-                      <source src={project.video} type="video/mp4" />
+                      <source src={project.video} type={project.video.endsWith(".m4v") ? "video/x-m4v" : "video/mp4"} />
                       Tu navegador no soporta la reproducción de video.
                     </video>
                   </div>
@@ -380,7 +380,7 @@ export function ProjectPage({ project, onBack }: { project: Project; onBack: () 
                   playsInline
                   aria-label={`Video demo de ${project.name}`}
                 >
-                  <source src={project.video} type="video/mp4" />
+                  <source src={project.video} type={project.video.endsWith(".m4v") ? "video/x-m4v" : "video/mp4"} />
                   Tu navegador no soporta la reproducción de video.
                 </video>
               </div>

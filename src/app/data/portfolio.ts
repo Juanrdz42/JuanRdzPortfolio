@@ -171,7 +171,7 @@ export const projects: Project[] = [
     ],
     galleryLabels: ["Gameplay", "Gameplay", "Equipo", "Dashboard", "Login", "Admin panel"],
     galleryLabel: "Gallery",
-    video: "/images/projects/awaq/awaq_demo.mp4",
+    video: "/images/projects/awaq/awaq_demo_web.m4v",
     videoLabel: "Game Demo",
   },
 ];
