@@ -24,10 +24,12 @@ export interface Project {
   contribution: string;
   contributionLabel?: string;
   architecture?: string;
+  technicalDecisions?: { title: string; text: string }[];
   metrics?: { label: string; value: string }[];
   gallery: string[];
   galleryLabel?: string;
   galleryLabels?: string[];
+  galleryTransparent?: boolean;
   video?: string;
   videoLabel?: string;
   challenges?: string;

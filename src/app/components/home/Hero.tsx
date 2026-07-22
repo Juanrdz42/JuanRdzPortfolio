@@ -1,4 +1,5 @@
 import { ChevronRight, Download, Github, Linkedin, Mail } from "lucide-react";
+import { motion, useAnimationControls, useReducedMotion } from "motion/react";
 import { RESUME_PATH, SOCIAL_LINKS } from "../../config/site";
 import { personal } from "../../data/personal";
 import { CodePreview } from "./CodePreview";
@@ -11,6 +12,21 @@ export function Hero({
   onViewProjects: () => void;
   onViewExperience: () => void;
 }) {
+  const waveControls = useAnimationControls();
+  const reduceMotion = useReducedMotion();
+  const greeting = "Hi!";
+  const introduction = personal.description.startsWith(greeting)
+    ? personal.description.slice(greeting.length)
+    : ` ${personal.description}`;
+
+  const wave = () => {
+    if (reduceMotion) return;
+    void waveControls.start({
+      rotate: [0, 22, -12, 22, -8, 14, 0],
+      transition: { duration: 0.75, ease: "easeInOut" },
+    });
+  };
+
   return (
     <section
       className="relative overflow-hidden border-b border-[#6AA3D8]/20 px-6 pb-16 pt-12 sm:px-8 lg:px-12 lg:pb-20 lg:pt-16"
@@ -31,7 +47,20 @@ export function Hero({
           </h1>
 
           <p className="mb-6 max-w-[680px] text-base leading-7 text-[#A7BACD] sm:text-[17px]">
-            {personal.description}
+            {greeting}{" "}
+            <motion.button
+              type="button"
+              animate={waveControls}
+              onClick={wave}
+              onHoverStart={wave}
+              onFocus={wave}
+              className="inline-block origin-[70%_70%] cursor-pointer rounded-md align-baseline text-[1.2em] leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#62B0F4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#06243B]"
+              aria-label="Wave hello"
+              title="Say hi!"
+            >
+              👋
+            </motion.button>
+            {introduction}
           </p>
 
           <QuickInfo />

@@ -14,6 +14,26 @@ export const projects: Project[] = [
     contribution:
       "I worked across almost every part of the project. I contributed to hardware prototyping, designed the SQL database and backend architecture, implemented the data pipeline connecting the ESP32 with the Android application through MQTT, and contributed to the embedded software and AI recommendation system. One of my favorite moments was seeing data collected by the bottle successfully travel through the entire system and appear in the mobile application. It was the first time I had built an end-to-end IoT product, and seeing data travel from a sensor inside the bottle all the way to the mobile app was one of the most rewarding parts of the project.",
     contributionLabel: "My Role",
+    architecture:
+      "Bottle sensors → ESP32 firmware → MQTT → Cloud backend → SQL database → Android app → Gemini AI recommendations",
+    technicalDecisions: [
+      {
+        title: "Why ESP32?",
+        text: "Chosen for its integrated Wi-Fi, low power consumption, and compatibility with the sensors, making it ideal for a connected IoT device.",
+      },
+      {
+        title: "Why MQTT?",
+        text: "MQTT provided lightweight, low-latency communication between the bottle and backend, enabling reliable real-time synchronization.",
+      },
+      {
+        title: "Why SQL?",
+        text: "A relational database simplified hydration history, analytics, and user management while supporting future expansion.",
+      },
+      {
+        title: "Why Gemini AI?",
+        text: "Instead of only displaying raw hydration data, Gemini generated personalized recommendations based on each user's drinking habits, making the application more engaging.",
+      },
+    ],
     challenges:
       "This project challenged me in a completely different way than traditional software projects. Every change to the hardware affected the embedded software, which often required updates to the backend and mobile application as well. Unlike software, fixing a problem wasn't as simple as changing a few lines of code. We often had to redesign parts of the bottle, wait for new 3D prints, reassemble the electronics, and test everything again before moving forward. It made me appreciate how iterative product development really is and taught me that building reliable systems requires patience just as much as technical knowledge.",
     challengesLabel: "Biggest Challenge",
@@ -49,19 +69,58 @@ export const projects: Project[] = [
       "An iOS application that teaches Mexican Sign Language through real-time hand gesture recognition, interactive lessons, and AI-assisted feedback.",
     image: "/images/projects/ensenname/ensename.png",
     tech: ["Swift", "Vision Framework", "Core ML"],
-    features: ["Guided Lessons", "Practice Mode", "Sign Dictionary", "AI Feedback", "Real-Time Recognition"],
+    features: [
+      "Real-time Hand Pose Detection",
+      "On-device ML Inference",
+      "Adaptive Learning Flow",
+      "Lesson-based Recognition Models",
+      "Instant Visual Feedback",
+    ],
     overview:
       "Learning a Sign Language often means memorizing static images or videos, making it difficult to practice and receive immediate feedback. During a 48-hour hackathon, our team built EnSéñame, an iOS application that turns sign language practice into an interactive learning experience using real-time hand pose detection, guided lessons, and instant feedback. Our goal was to make learning LSM (Mexican Sign Language) feel closer to Duolingo than to a dictionary.",
     contribution:
-      "I developed the computer vision pipeline using Apple's Vision Framework and Core ML to recognize Mexican Sign Language gestures in real time. Besides building the computer vision pipeline, I also helped design the learning experience by implementing guided lessons, practice challenges, and a sign dictionary, making the application feel more like an educational platform than a simple gesture classifier.",
+      "I developed the computer vision pipeline using Apple's Vision Framework and Core ML to recognize Mexican Sign Language gestures in real time. Besides implementing the computer vision pipeline, I designed the learning flow, integrated the lesson engine, and helped build an experience that feels like an educational platform instead of a simple gesture classifier.",
     contributionLabel: "My Role",
+    architecture:
+      "iPhone Camera → Vision Framework → 21 hand landmarks → Core ML gesture classification → Predicted sign → Lesson engine → AI feedback and next lesson",
+    technicalDecisions: [
+      {
+        title: "Why Vision Framework?",
+        text: "Apple's Vision Framework provided robust real-time hand landmark detection without requiring custom pose estimation, allowing us to focus on gesture classification instead of image processing.",
+      },
+      {
+        title: "Why Core ML?",
+        text: "Running inference directly on the device eliminated network latency and kept the experience responsive during live practice.",
+      },
+      {
+        title: "Why Separate Models?",
+        text: "Different lesson categories contained different gesture distributions. Splitting the models improved accuracy while making future lessons easier to expand independently.",
+      },
+      {
+        title: "Why On-device AI?",
+        text: "Sign recognition needs immediate feedback. Running everything locally reduced latency and allowed the app to work without internet connectivity.",
+      },
+    ],
     challenges:
-      "One of the biggest challenges was balancing accuracy with the limited time of a 48-hour hackathon. We quickly realized that training a single model to recognize every sign produced inconsistent results, so we changed our approach and trained separate models for different lesson categories. That decision significantly improved recognition accuracy and allowed us to deliver a much more reliable experience before the deadline.",
+      "We initially trained a single model to recognize every gesture in the application. During testing, visually similar signs from different lessons confused the classifier and reduced accuracy. We redesigned the system to use independent models for each lesson category, improving recognition while making the application easier to extend.",
     challengesLabel: "Biggest Challenge",
     lessons:
       "Before this hackathon, I had never trained a computer vision model or built an iOS app. In 48 hours, I learned both. More importantly, I learned that the first solution is rarely the right one, and sometimes changing direction completely is what makes a project work.",
     lessonsLabel: "What I Learned",
-    gallery: ["/images/projects/ensenname/ensename.png"],
+    gallery: [
+      "/images/projects/ensenname/1.png",
+      "/images/projects/ensenname/2.png",
+      "/images/projects/ensenname/3.png",
+    ],
+    galleryLabels: [
+      "Lesson Path",
+      "Video-Based Question",
+      "Answer Selection",
+    ],
+    galleryLabel: "App Screenshots",
+    galleryTransparent: true,
+    video: "/images/projects/ensenname/WhatsApp Video 2026-07-22 at 15.36.13.mp4",
+    videoLabel: "Live Demo",
   },
   {
     id: "project-awaq",
@@ -72,12 +131,32 @@ export const projects: Project[] = [
     image: "/images/projects/awaq/1.png",
     tech: ["ASP.NET Core MVC", "Unity", "C#", "SQL"],
     overview:
-      "This was my first software project developed for a real client. Over ten weeks, our team partnered with AWAQ ONGD to build a platform that teaches environmental field monitoring through a gamified Unity WebGL experience and a companion web application where users could track their learning progress while administrators monitored their activity through a companion dashboard.",
+      "AWAQ is a web platform that combines a Unity WebGL educational game with a companion web application. Users authenticate once, play directly in their browser, and have their learning progress synchronized in real time through an ASP.NET Core backend and SQL database. Administrators can monitor player activity and learning outcomes from the same platform.",
     contribution:
-      "I was responsible for integrating the Unity WebGL game with the web platform by designing and developing the ASP.NET Core MVC backend and SQL database. I implemented authentication, player progress tracking, and the APIs that synchronized gameplay data with the admin dashboard, ensuring gameplay progress remained synchronized between the game and the web dashboard.",
+      "I designed and developed the ASP.NET Core MVC backend and SQL database that turned the game and website into one integrated ecosystem. I implemented authentication, player progress tracking, and the REST APIs used by Unity WebGL. Players could sign in on the website, launch the game without leaving the platform, and watch their progress update automatically as they completed activities.",
     contributionLabel: "My Role",
+    architecture:
+      "                 AWAQ Learning Platform\n\n                 User Login\n             ASP.NET Core MVC\n                      │\n               Authentication\n                      │\n                 SQL Database\n              Users & Progress\n                      │\n          ┌───────────┴───────────┐\n          │                       │\n      REST APIs               Dashboard\n          │                       │\n     Unity WebGL             Web Platform\n Educational Game      Statistics & Progress\n          │\n  Player completes a level\n          │\n Sends progress to backend\n          │\n          ▼\n  SQL updates instantly\n          │\n          ▼\nProgress visible on the website",
+    technicalDecisions: [
+      {
+        title: "Why Unity WebGL?",
+        text: "It let users play directly in the browser without downloading a desktop application, keeping the educational game embedded in the same authenticated experience.",
+      },
+      {
+        title: "Why ASP.NET Core MVC?",
+        text: "It served as the central application for authentication, business logic, the web interface, and the APIs consumed by Unity, simplifying development and maintenance.",
+      },
+      {
+        title: "Why SQL?",
+        text: "User accounts, completed levels, achievements, and progress are relational data. SQL provided reliable persistence and made statistics and progress reports easy to query.",
+      },
+      {
+        title: "Why REST APIs?",
+        text: "Unity communicated through validated backend endpoints instead of accessing the database directly, protecting the data and giving the game and website one source of truth.",
+      },
+    ],
     challenges:
-      "To be honest, this was the most challenging project I had worked on at the time because of the number of technologies I had to learn in a short period to deliver a functional product. I had to learn Unity, ASP.NET Core MVC, SQL, authentication, REST APIs, and how to integrate all of them into a single application. It pushed me far outside my comfort zone and taught me how to quickly learn unfamiliar technologies while collaborating with a team to build software for a real client.",
+      "The hardest part wasn't learning Unity or ASP.NET individually. It was designing an architecture where a Unity WebGL game, a web platform, authentication, and a shared SQL database behaved like a single application. Every feature required coordinating changes across multiple layers while keeping gameplay and progress synchronized.",
     challengesLabel: "Biggest Challenge",
     lessons:
       "This project changed the way I viewed software engineering. Until then, most of my assignments ended once the code worked. AWAQ taught me that building software means understanding users, collaborating with a team, and creating systems that people can actually rely on. It was the project that made me realize I wanted to pursue software engineering professionally.",

@@ -13,10 +13,12 @@ export function ProjectCarousel({
   images,
   projectName,
   labels,
+  transparent = false,
 }: {
   images: string[];
   projectName: string;
   labels?: string[];
+  transparent?: boolean;
 }) {
   const [api, setApi] = useState<CarouselApi>();
   const [activeSlide, setActiveSlide] = useState(0);
@@ -57,11 +59,11 @@ export function ProjectCarousel({
         <CarouselContent className="ml-0">
           {images.map((src, index) => (
             <CarouselItem key={src} className="pl-0">
-              <div className="glass-card overflow-hidden rounded-xl bg-[#031D31]/70">
+              <div className={transparent ? "flex justify-center" : "glass-card overflow-hidden rounded-xl bg-[#031D31]/70"}>
                 <img
                   src={src}
                   alt={labels?.[index] ?? `${projectName}, imagen ${index + 1} de ${images.length}`}
-                  className="aspect-video w-full object-contain"
+                  className={transparent ? "h-[620px] max-h-[72vh] w-auto max-w-full object-contain" : "aspect-video w-full object-contain"}
                   loading={index === 0 ? "eager" : "lazy"}
                 />
               </div>

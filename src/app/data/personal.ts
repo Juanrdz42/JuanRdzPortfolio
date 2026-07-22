@@ -2,7 +2,7 @@ export const personal = {
   name: "Juan Antonio Rodríguez Reyna",
   degree: "B.S. in Computer Science and Technology",
   description:
-    "Hi! I'm a Computer Science and Technology student at Tecnológico de Monterrey who loves building things. I enjoy taking on projects that push me to learn new technologies and solve problems I haven't seen before. Whether it's developing software, prototyping hardware, or leading technical initiatives, I'm happiest when I'm building something that didn't exist before.",
+    "Hi! I'm a Computer Science student at Tecnológico de Monterrey who believes the best way to learn is by building. Whether I'm developing software, experimenting with AI, prototyping hardware, or leading technical initiatives, I'm always looking for opportunities to solve meaningful problems and create products people can use.",
   location: "Monterrey, Nuevo León, Mexico",
   university: "Tecnológico de Monterrey",
   specialization: "Computer Science & Technology",
