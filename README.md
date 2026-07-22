@@ -1,8 +1,5 @@
 
-  # Desktop Portfolio Design
-
-  This is a code bundle for Desktop Portfolio Design. The original project is available at https://www.figma.com/design/s8TVtgbXm5JJjzmg9Yjona/Desktop-Portfolio-Design.
-
+  # My Portfolio
   ## Running the code
 
   Run `npm i` to install the dependencies.
