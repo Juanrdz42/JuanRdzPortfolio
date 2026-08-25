@@ -8,7 +8,7 @@ export const personal = {
   specialization: "Computer Science & Technology",
   languages: "Spanish / English / Italian",
   drivenBy: ["Building Products", "Growing Tech Communities", "Learning by Doing"],
-  openTo: ["Software Engineering Internships", "Project Management Internships"],
+  openTo: ["Software Engineering Internships", "Product Management Internships"],
   email: "juanrodriguez2135@gmail.com",
 } as const;
 
