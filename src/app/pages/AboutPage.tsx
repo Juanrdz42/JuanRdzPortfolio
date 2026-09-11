@@ -7,6 +7,7 @@ const aboutPhotos = [
   "/images/about/IMG_0514.jpg",
   "/images/about/IMG_0515.jpg",
   "/images/about/IMG_0516.jpg",
+  "/images/leadership/seitc/seitc2.jpeg",
 ];
 
 const quickInfo = [
@@ -76,7 +77,11 @@ export function AboutPage({ onBack }: { onBack: () => void }) {
                   transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 240, damping: 24 }}
                   style={{ zIndex: aboutPhotos.length - position }}
                 >
-                  <img src={photo} alt={`Juan, photo ${index + 1}`} className="h-full w-full object-cover" />
+                  <img
+                    src={photo}
+                    alt={photo === "/images/leadership/seitc/seitc2.jpeg" ? "Juan holding the Computer Science Student Society certificate at the SEITC ceremony" : `Juan, photo ${index + 1}`}
+                    className="h-full w-full object-cover"
+                  />
                 </motion.button>
               );
             })}

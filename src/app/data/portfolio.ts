@@ -208,33 +208,41 @@ export const leadershipData = {
   role: "President",
   period: "May 2026 – Present",
   image: "/images/leadership/seitc/seitc.png",
+  // Add event photos here once available; use accurate event captions and descriptive alt text.
+  // Still needed: LeetCode & DSAs 101 and Finish It Friday in progress.
   gallery: [
-    "/images/leadership/seitc/seitc1.png",
+    { src: "/images/leadership/seitc/seitc5.jpeg", alt: "SEITC organizers seated in front of students gathered in a tiered classroom", caption: "Our CS community, together", featured: true },
+    { src: "/images/leadership/seitc/seitc6.jpeg", alt: "Students talking with SEITC representatives around a computer at the ITC information stand", caption: "Introducing students to Computer Science", featured: false },
+    { src: "/images/leadership/seitc/seitc4.jpeg", alt: "SEITC members and faculty standing together after a recognition ceremony", caption: "The team behind the term", featured: false },
+    { src: "/images/leadership/seitc/seitc3.jpeg", alt: "Juan shaking hands onstage during the student society ceremony", caption: "Beginning of the 2026–2027 term", featured: false },
+    { src: "/images/leadership/seitc/seitc1.jpeg", alt: "Juan holding a certificate while posing with the SEITC group at the ceremony", caption: "Celebrating the beginning, together", featured: false },
+    { src: "/images/leadership/seitc/seitc2.jpeg", alt: "Juan seated at the ceremony holding the Computer Science Student Society certificate", caption: "A new responsibility", featured: false },
+    // Preserve the original photo as a record of Juan's first semester in the community.
+    { src: "/images/leadership/seitc/seitc1.png", alt: "Students gathered around the student society logo during Juan’s first semester", caption: "Where it all began — my first semester", featured: false },
   ],
   overview:
-    "Ever since I started my Computer Science degree, I knew I wanted to be part of SEITC. As a freshman, I looked up to the students organizing technical workshops, networking events, and activities that brought our community together. I wanted to contribute to that same mission someday.\n\nI joined as Social Responsibility Coordinator during my first year, later served as Finance Coordinator, and today I have the privilege of leading the organization as President. Looking back, it's incredible to realize that I went from attending SEITC events as a new student to helping shape the experience for the next generation of Computer Science students.",
+    "Ever since I started my Computer Science degree, I knew I wanted to be part of SEITC. As a freshman, I looked up to the students organizing technical workshops, networking events, and activities that brought our community together. I wanted to contribute to that same mission someday.\n\nI joined as Social Responsibility Coordinator during my first year, later served as Finance Coordinator, and today I lead the organization as President. What started as attending SEITC events as a new student has grown into the opportunity to help shape the experience for our Computer Science community.",
   journey: [
     { year: "2024", role: "Social Responsibility Coordinator" },
     { year: "2025", role: "Finance Coordinator" },
     { year: "2026", role: "President" },
   ],
   journeySummary:
-    "Each role taught me something different. Social Responsibility introduced me to organizing initiatives with purpose, Finance taught me how to manage resources and make decisions that affected the entire organization, and becoming President has challenged me to think beyond individual events and focus on building a long-term vision for our community.",
-  bullets: [
-    "Expand technical workshops led by students and industry professionals.",
-    "Strengthen internship and interview preparation initiatives.",
-    "Build stronger relationships with technology companies.",
-    "Create more opportunities for students to connect, learn, and grow together.",
-    "Make Computer Science more accessible through outreach activities for younger students.",
+    "Each role taught me something different. Social Responsibility introduced me to organizing initiatives with purpose, Finance taught me how to manage resources and make decisions that affected the entire organization, and becoming President has pushed me to think beyond individual events and focus on building a stronger long-term community.",
+  buildingIntro:
+    "This term, we've been turning that vision into actual experiences for students. Together with the SEITC team, we've organized initiatives around technical learning, career preparation, community, and exposure to Computer Science.",
+  initiatives: [
+    { title: "LeetCode & DSAs 101", category: "Technical learning", description: "A technical workshop designed to help students practice data structures, algorithms, and interview-style problem solving.", outcome: "We planned for around 30 students and ended up exceeding capacity." },
+    { title: "Welcome ITC", category: "Student community", description: "A welcome event for Computer Science students focused on helping newer students connect with the community.", outcome: "Around 50 students joined us." },
+    { title: "Finish It Friday", category: "Building together", description: "A collaborative space where students could work on unfinished projects, assignments, or personal ideas alongside others." },
+    { title: "Explora Ingenierías", category: "CS outreach", description: "We participated in introducing prospective students to Computer Science and the ITC community." },
   ],
+  next:
+    "We’re continuing to build technical workshops, internship and interview preparation initiatives, industry collaborations, and outreach opportunities that make Computer Science more accessible to younger students.",
+  focusAreas: ["Technical workshops", "Interview & internship preparation", "Industry collaboration", "Student community", "Computer Science outreach"],
   whyItMatters:
-    "SEITC means much more to me than a leadership position. It's a chance to give back to the community that has shaped my college experience since my first semester. Our executive board has only recently started its term, so many of our biggest goals are still ahead of us, and that's exactly what excites me the most. I'm looking forward to spending the next year building opportunities that I hope future students will enjoy just as much as I once did.",
-  metrics: [
-    { label: "Student Community", value: "700+" },
-    { label: "Executive Board", value: "8 members" },
-    { label: "Applicants Interviewed", value: "20+" },
-    { label: "Campus Workshop", value: "4 hours" },
-  ],
+    "SEITC means much more to me than a leadership position. It’s a chance to give back to the community that has shaped my college experience since my first semester.\n\nSeeing students fill a room for a LeetCode workshop, welcome new classmates into the program, or simply meet people they can learn alongside has made the work behind each event worth it. I’m excited to keep building a community where students have more opportunities to learn, connect, and grow together.",
+
 };
 
 export const ciberistasData = {

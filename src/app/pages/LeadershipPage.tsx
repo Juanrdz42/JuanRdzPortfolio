@@ -1,8 +1,8 @@
 import { motion, useReducedMotion } from "motion/react";
-import { Calendar } from "lucide-react";
+import { Calendar, Expand } from "lucide-react";
 import { leadershipData } from "../data/portfolio";
-import { BackButton, SectionLabel } from "../components/shared/PortfolioUI";
-import { ProjectCarousel } from "../components/shared/ProjectCarousel";
+import { BackButton, SectionLabel, TechChip } from "../components/shared/PortfolioUI";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "../components/ui/dialog";
 
 export function LeadershipPage({ onBack }: { onBack: () => void }) {
   const ld = leadershipData;
@@ -19,10 +19,10 @@ export function LeadershipPage({ onBack }: { onBack: () => void }) {
         <h1 className="text-4xl font-semibold text-[#F4F7FB] tracking-tight">{ld.org}</h1>
         <p className="mt-2 text-base text-[#A7BACD]">{ld.role}, {ld.fullName}</p>
         <p className="mt-4 flex items-center gap-2 font-mono text-xs text-[#9EB1C4]"><Calendar size={12} />{ld.period}</p>
-        <div className="glass-inset mt-5 inline-flex items-center gap-3 rounded-lg border border-dashed border-[#6AA3D8]/30 px-4 py-2.5">
+        <div className="glass-inset mt-5 inline-flex flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-dashed border-[#6AA3D8]/30 px-4 py-2.5">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--xcode-orange)]" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--xcode-orange-soft)]">More coming soon</span>
-          <span className="hidden text-xs text-[#9EB1C4] sm:inline">Our term is just getting started.</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--xcode-orange-soft)]">2026–2027 Term</span>
+          <span className="basis-full text-xs leading-relaxed text-[#9EB1C4]">Building our CS community through technical education, career preparation, and industry collaboration.</span>
         </div>
       </div>
 
@@ -34,7 +34,7 @@ export function LeadershipPage({ onBack }: { onBack: () => void }) {
       <div className="glass-card relative mb-8 aspect-video overflow-hidden rounded-2xl bg-[#031D31]/70">
         <img
           src={ld.image}
-          alt="Portada de SEITC"
+          alt="SEITC — Computer Science Student Society logo"
           className="h-full w-full object-contain opacity-90"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#07182C]/85 via-[#07182C]/20 to-transparent" />
@@ -52,35 +52,65 @@ export function LeadershipPage({ onBack }: { onBack: () => void }) {
           <p className="mt-6 text-sm leading-relaxed text-[#9EB1C4]">{ld.journeySummary}</p>
         </div>
 
-        <div>
-          <SectionLabel>What We're Building</SectionLabel>
-          <ul className="space-y-3">
-            {ld.bullets.map((b, i) => (
-              <li key={i} className="text-sm text-[#9EB1C4] flex gap-3 leading-relaxed">
-                <span className="text-[#0A84FF] flex-shrink-0 mt-0.5">›</span>
-                {b}
-              </li>
+        <section>
+          <SectionLabel>What We’ve Been Building</SectionLabel>
+          <p className="mb-5 text-sm leading-relaxed text-[#9EB1C4]">{ld.buildingIntro}</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {ld.initiatives.map((initiative) => (
+              <article key={initiative.title} className="glass-card rounded-xl p-5">
+                <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-[var(--xcode-orange-soft)]">{initiative.category}</p>
+                <h3 className="text-base font-medium text-[#F4F7FB]">{initiative.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#9EB1C4]">{initiative.description}</p>
+                {initiative.outcome && <p className="mt-4 border-t border-[#6AA3D8]/20 pt-3 text-xs leading-relaxed text-[#C4D6E8]">{initiative.outcome}</p>}
+              </article>
             ))}
-          </ul>
-        </div>
+          </div>
+        </section>
+
+        <section>
+          <SectionLabel>What’s Next</SectionLabel>
+          <p className="mb-4 text-sm leading-relaxed text-[#9EB1C4]">{ld.next}</p>
+          <div className="flex flex-wrap gap-2">
+            {ld.focusAreas.map((area) => <TechChip key={area} label={area} />)}
+          </div>
+        </section>
 
         <div>
           <SectionLabel>Why It Matters</SectionLabel>
-          <p className="text-sm leading-relaxed text-[#9EB1C4]">{ld.whyItMatters}</p>
+          <p className="whitespace-pre-line text-sm leading-relaxed text-[#9EB1C4]">{ld.whyItMatters}</p>
         </div>
 
-        {ld.gallery.length > 0 && (
-          <div>
-            <SectionLabel>Gallery</SectionLabel>
-            {ld.gallery.length > 1 ? (
-              <ProjectCarousel images={ld.gallery} projectName={ld.org} />
-            ) : (
-              <div className="glass-card aspect-video overflow-hidden rounded-xl bg-[#031D31]/70">
-                <img src={ld.gallery[0]} alt={`${ld.org} team`} className="h-full w-full object-contain" />
-              </div>
-            )}
+        <section>
+          <SectionLabel>Gallery</SectionLabel>
+          <p className="mb-5 text-sm text-[#9EB1C4]">The people and moments behind the work.</p>
+          <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {ld.gallery.map((photo) => (
+              <figure key={photo.src} className={photo.featured ? "sm:col-span-2 lg:row-span-2" : ""}>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button
+                      type="button"
+                      aria-label={`Enlarge photo: ${photo.caption}`}
+                      className="glass-card group relative block w-full overflow-hidden rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--xcode-orange)]"
+                    >
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        loading="lazy"
+                        className={`w-full object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.02] ${photo.featured ? "aspect-[4/3]" : "aspect-[3/2]"}`}
+                      />
+                      <span aria-hidden="true" className="absolute bottom-3 right-3 rounded-md border border-white/20 bg-[#07182C]/85 p-2 text-[#F4F7FB]"><Expand size={14} /></span>
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent aria-describedby={undefined} className="max-h-[90dvh] overflow-y-auto border-[#6AA3D8]/30 bg-[#07182C] text-[#F4F7FB] sm:max-w-[min(960px,calc(100%-2rem))]">
+                    <DialogTitle className="pr-7 font-mono text-sm leading-relaxed">{photo.caption}</DialogTitle>
+                    <img src={photo.src} alt={photo.alt} className="max-h-[72dvh] w-full rounded-md object-contain" />
+                  </DialogContent>
+                </Dialog>
+              </figure>
+            ))}
           </div>
-        )}
+        </section>
 
       </div>
     </motion.div>
