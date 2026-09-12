@@ -12,7 +12,11 @@ export function HomePage({ onNavigate }: { onNavigate: (page: Page) => void }) {
   const projectsRef = useRef<HTMLElement>(null);
   const experienceRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
-  const orderedProjects = [...projects.filter((project) => project.id !== "project-oasis"), ...projects.filter((project) => project.id === "project-oasis")];
+  const orderedProjects = [
+    ...projects.filter((project) => project.id === "project-agv"),
+    ...projects.filter((project) => project.id !== "project-agv" && project.id !== "project-oasis"),
+    ...projects.filter((project) => project.id === "project-oasis"),
+  ];
 
   const scrollToProjects = () => {
     projectsRef.current?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
