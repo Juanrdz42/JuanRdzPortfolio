@@ -27,7 +27,7 @@ export const navigationGroups: NavigationGroup[] = [
     id: "projects",
     label: "Projects",
     files: projects.map((project) => ({
-      label: `${project.name}.tsx`,
+      label: project.id === "project-agv" ? "AGV.tsx" : `${project.name}.tsx`,
       page: project.id,
     })),
   },

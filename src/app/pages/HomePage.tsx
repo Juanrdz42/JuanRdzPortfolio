@@ -65,12 +65,12 @@ export function HomePage({ onNavigate }: { onNavigate: (page: Page) => void }) {
                       </div>
                       <p className="mb-5 max-w-2xl text-sm leading-relaxed text-[#A7BACD]">{project.description}</p>
                       <div className="flex flex-wrap gap-1.5">
-                        {project.tech.slice(0, 5).map((technology) => (
+                        {(project.cardTech ?? project.tech).slice(0, 5).map((technology) => (
                           <TechChip key={technology} label={technology} />
                         ))}
-                        {project.tech.length > 5 && (
+                        {(project.cardTech ?? project.tech).length > 5 && (
                           <span className="ml-0.5 self-center font-mono text-xs text-[#9EB1C4]">
-                            +{project.tech.length - 5}
+                            +{(project.cardTech ?? project.tech).length - 5}
                           </span>
                         )}
                       </div>

@@ -4,6 +4,7 @@ import { EmptyEditor } from "./components/layout/EmptyEditor";
 import { Sidebar } from "./components/layout/Sidebar";
 import { Toolbar } from "./components/layout/Toolbar";
 import { projects } from "./data/portfolio";
+import { AGVPage } from "./pages/AGVPage";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
 import { CiberistasPage } from "./pages/CiberistasPage";
@@ -47,6 +48,8 @@ export default function App() {
         return <RuntimePage onBack={() => navigate("home")} />;
       case "contact":
         return <ContactPage onBack={() => navigate("home")} />;
+      case "project-agv":
+        return <AGVPage onBack={() => navigate("home")} />;
       case "project-oasis":
       case "project-ensenname":
       case "project-awaq": {

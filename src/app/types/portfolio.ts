@@ -6,6 +6,7 @@ export type Page =
   | "leadership-ciberistas"
   | "leadership-runtime"
   | "contact"
+  | "project-agv"
   | "project-oasis"
   | "project-ensenname"
   | "project-awaq";
@@ -19,6 +20,7 @@ export interface Project {
   description: string;
   image: string;
   tech: string[];
+  cardTech?: string[];
   features?: string[];
   overview: string;
   contribution: string;

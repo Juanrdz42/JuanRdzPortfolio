@@ -1,3 +1,4 @@
+import { agvProject } from "./agv";
 import type { Project } from "../types/portfolio";
 
 export const projects: Project[] = [
@@ -122,6 +123,7 @@ export const projects: Project[] = [
     video: "/images/projects/ensenname/WhatsApp Video 2026-07-22 at 15.36.13.mp4",
     videoLabel: "Live Demo",
   },
+  agvProject,
   {
     id: "project-awaq",
     name: "AWAQ",
